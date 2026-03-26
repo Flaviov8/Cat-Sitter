@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Pet Sitter | Formulário Premium</title>
+    <title>🐾 Pet Sitter | Formulário Premium 🐾</title>
     <style>
         * {
             margin: 0;
@@ -153,16 +153,16 @@
             font-weight: 600;
             color: #1b5e20;
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             letter-spacing: -0.2px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         label i {
             font-style: normal;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
         input, select, textarea {
@@ -293,6 +293,9 @@
             margin-bottom: 0.6rem;
             font-size: 0.9rem;
             color: #2c5e2a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .radio-group {
@@ -636,7 +639,7 @@
     
     <form id="petForm" novalidate>
         <div class="form-group">
-            <label><i>🐾</i> Seu nome completo</label>
+            <label><i>👤</i> Seu nome completo</label>
             <input type="text" id="ownerName" placeholder="Como podemos te chamar?" required>
         </div>
         
@@ -661,7 +664,7 @@
         <div class="form-group">
             <label><i>🐕🐱</i> Quantidade de pets</label>
             <div class="pet-counter">
-                <button type="button" id="decPetCount" aria-label="Diminuir">-</button>
+                <button type="button" id="decPetCount" aria-label="Diminuir">−</button>
                 <input type="number" id="petCount" value="1" min="1" max="10" step="1" readonly style="background: #fafef5; font-weight: 600;">
                 <button type="button" id="incPetCount" aria-label="Aumentar">+</button>
             </div>
@@ -719,7 +722,7 @@
                 <span>💚</span> Enviar via WhatsApp <span>📱</span>
             </button>
             <button type="button" id="clearBtn" class="btn-clear">
-                <span>🧹</span> Limpar formulário
+                <span>🗑️</span> Limpar formulário
             </button>
         </div>
     </form>
@@ -738,7 +741,7 @@
     function generateFloatingPaws() {
         const container = document.getElementById('floatingDecor');
         if(!container) return;
-        const icons = ['🐾', '🐱', '🐕', '🦴', '🐈‍⬛', '🍃', '💚', '🌟'];
+        const icons = ['🐾', '🐱', '🐕', '🦴', '🐈‍⬛', '🍃', '💚', '🌟', '🐶', '😺'];
         for(let i=0; i<20; i++) {
             let paw = document.createElement('div');
             paw.className = 'floating-paw';
@@ -895,14 +898,14 @@
     }
     
     function validateForm(data) {
-        if(!data.ownerName) return "Por favor, informe seu nome completo.";
-        if(!data.address) return "Por favor, informe seu endereço completo para agendamento.";
-        if(!data.phone) return "Por favor, informe seu telefone/WhatsApp.";
-        if(!data.email) return "Informe seu e-mail.";
-        if(!data.email.includes('@') || !data.email.includes('.')) return "E-mail inválido.";
-        if(!data.petName) return "Informe o nome do(s) seu(s) pet(s).";
-        if(!data.age) return "Informe a idade do pet.";
-        if(parseInt(data.petCount) < 1) return "Informe a quantidade de pets (mínimo 1).";
+        if(!data.ownerName) return "Por favor, informe seu nome completo. 👤";
+        if(!data.address) return "Por favor, informe seu endereço completo para agendamento. 📍";
+        if(!data.phone) return "Por favor, informe seu telefone/WhatsApp. 📱";
+        if(!data.email) return "Informe seu e-mail. ✉️";
+        if(!data.email.includes('@') || !data.email.includes('.')) return "E-mail inválido. ✉️";
+        if(!data.petName) return "Informe o nome do(s) seu(s) pet(s). 🐕";
+        if(!data.age) return "Informe a idade do pet. 📅";
+        if(parseInt(data.petCount) < 1) return "Informe a quantidade de pets (mínimo 1). 🐾";
         return null;
     }
     
@@ -981,7 +984,7 @@
             successTip.className = 'error-message';
             successTip.style.background = '#dff0dc';
             successTip.style.color = '#2b5e2b';
-            successTip.innerHTML = '🧹 Formulário limpo com sucesso!';
+            successTip.innerHTML = '🧹 Formulário limpo com sucesso! ✨';
             const formEl = document.getElementById('petForm');
             formEl.insertBefore(successTip, formEl.firstChild);
             setTimeout(() => successTip.remove(), 2000);

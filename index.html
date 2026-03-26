@@ -29,9 +29,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('Gato.jpg');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234caf50" opacity="0.03"><path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,6c1.1,0,2,0.9,2,2s-0.9,2-2,2 s-2-0.9-2-2S10.9,6,12,6z M12,18c-2.33,0-4.31-1.46-5.11-3.5h10.22C16.31,16.54,14.33,18,12,18z"/></svg>');
             background-repeat: repeat;
-            background-size: px;
+            background-size: 32px;
             pointer-events: none;
             z-index: 0;
         }
@@ -58,7 +58,7 @@
 
         /* container principal com glassmorphism */
         .form-container {
-            max-width: 980px;
+            max-width: 1080px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.97);
             backdrop-filter: blur(8px);
@@ -185,7 +185,7 @@
 
         textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 90px;
         }
 
         /* grupo de tipo de pet com botões modernos */
@@ -334,8 +334,20 @@
             gap: 1rem;
         }
 
+        .row-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 720px) {
+            .row-3col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 620px) {
-            .row-2col {
+            .row-2col, .row-3col {
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
@@ -401,6 +413,52 @@
             transform: translateY(-2px);
             border-color: #4caf50;
             box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+        }
+
+        /* contador de pets */
+        .pet-counter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f9fef7;
+            border-radius: 1.2rem;
+            padding: 0.3rem;
+            border: 2px solid #cfe9cf;
+        }
+
+        .pet-counter button {
+            width: 44px;
+            height: 44px;
+            border-radius: 60px;
+            border: none;
+            background: #4caf50;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pet-counter button:hover {
+            background: #2e7d32;
+            transform: scale(1.05);
+        }
+
+        .pet-counter button:active {
+            transform: scale(0.95);
+        }
+
+        .pet-counter input {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            background: white;
+            border: none;
+            width: 70px;
+            padding: 0.6rem;
         }
 
         /* modal refinado */
@@ -543,31 +601,6 @@
                 padding: 1rem;
             }
         }
-
-        /* tooltip sutil */
-        [data-tooltip] {
-            position: relative;
-            cursor: help;
-        }
-        [data-tooltip]:before {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 130%;
-            left: 0;
-            background: #2e3b2c;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: 0.15s;
-        }
-        [data-tooltip]:hover:before {
-            opacity: 1;
-            transform: translateY(-2px);
-        }
     </style>
 </head>
 <body>
@@ -577,7 +610,7 @@
 <div class="form-container">
     <div class="hero">
         <h1>
-            🌿 Cat Sitter  🌿
+            🌿 Cat Sitter Care 🌿
             <span>🐾</span>
         </h1>
         <p>💚 Cuidado premium, amor e bem-estar para seu melhor amigo 💚</p>
@@ -587,6 +620,12 @@
         <div class="form-group">
             <label><i>🐾</i> Seu nome completo</label>
             <input type="text" id="ownerName" placeholder="Como podemos te chamar?" required>
+        </div>
+        
+        <!-- ENDEREÇO COMPLETO DO TUTOR (NOVO) -->
+        <div class="form-group">
+            <label><i>📍</i> Endereço completo</label>
+            <input type="text" id="address" placeholder="Rua, número, bairro, cidade - CEP" required>
         </div>
         
         <div class="row-2col">
@@ -600,9 +639,20 @@
             </div>
         </div>
         
+        <!-- QUANTIDADE DE PETS (NOVO) -->
         <div class="form-group">
-            <label><i>🐕‍🦺</i> Nome do seu pet</label>
-            <input type="text" id="petName" placeholder="Ex: Fred, Luna, Mel" required>
+            <label><i>🐕🐱</i> Quantidade de pets</label>
+            <div class="pet-counter">
+                <button type="button" id="decPetCount" aria-label="Diminuir">-</button>
+                <input type="number" id="petCount" value="1" min="1" max="10" step="1" readonly style="background: #fafef5; font-weight: 600;">
+                <button type="button" id="incPetCount" aria-label="Aumentar">+</button>
+            </div>
+            <small style="color: #5a8f5a; margin-top: 6px; display: block;">💡 Informe quantos pets precisam de cuidados</small>
+        </div>
+        
+        <div class="form-group">
+            <label><i>🐕‍🦺</i> Nome do(s) pet(s)</label>
+            <input type="text" id="petName" placeholder="Ex: Fred, Luna, Mel (se mais de um, separe por vírgula)" required>
         </div>
         
         <div class="form-group">
@@ -615,6 +665,10 @@
                 <div class="pet-option">
                     <input type="radio" name="petType" id="typeDog" value="cachorro">
                     <label for="typeDog">🐶 Cachorro</label>
+                </div>
+                <div class="pet-option">
+                    <input type="radio" name="petType" id="typeBoth" value="ambos">
+                    <label for="typeBoth">🐱🐶 Ambos</label>
                 </div>
             </div>
         </div>
@@ -683,7 +737,26 @@
     }
     generateFloatingPaws();
 
-    // Banco de perguntas dinâmicas com mais fluidez
+    // Controle de quantidade de pets
+    const petCountInput = document.getElementById('petCount');
+    const decBtn = document.getElementById('decPetCount');
+    const incBtn = document.getElementById('incPetCount');
+    
+    decBtn.addEventListener('click', () => {
+        let val = parseInt(petCountInput.value);
+        if(val > 1) {
+            petCountInput.value = val - 1;
+        }
+    });
+    
+    incBtn.addEventListener('click', () => {
+        let val = parseInt(petCountInput.value);
+        if(val < 10) {
+            petCountInput.value = val + 1;
+        }
+    });
+    
+    // Banco de perguntas dinâmicas
     const questionsDB = {
         gato: [
             { text: "🧶 O gato é castrado?", field: "castrado_gato", type: "radio" },
@@ -698,6 +771,13 @@
             { text: "💉 Vacinas em dia (V8/V10, antirrábica)?", field: "vacinas_cao", type: "radio" },
             { text: "🤝 É sociável com estranhos e outros animais?", field: "sociabilidade_cao", type: "radio" },
             { text: "😬 Medos específicos (fogos, trovões)?", field: "medos_cao", type: "text" }
+        ],
+        ambos: [
+            { text: "🐱🐶 Todos são castrados?", field: "castrados_ambos", type: "radio" },
+            { text: "🏠 Têm acesso à rua?", field: "acesso_ambos", type: "radio" },
+            { text: "💊 Vacinas em dia?", field: "vacinas_ambos", type: "radio" },
+            { text: "🤝 Convivem bem entre si e com estranhos?", field: "sociabilidade_ambos", type: "radio" },
+            { text: "🚿 Rotina de banhos e cuidados especiais?", field: "cuidados_ambos", type: "text" }
         ]
     };
 
@@ -741,9 +821,12 @@
 
     const catRadio = document.getElementById('typeCat');
     const dogRadio = document.getElementById('typeDog');
+    const bothRadio = document.getElementById('typeBoth');
     
     function updateType() {
-        currentType = catRadio.checked ? 'gato' : 'cachorro';
+        if(catRadio.checked) currentType = 'gato';
+        else if(dogRadio.checked) currentType = 'cachorro';
+        else if(bothRadio.checked) currentType = 'ambos';
         renderQuestionsByType(currentType);
         const faqDiv = document.querySelector('.faq-section');
         if(faqDiv) {
@@ -754,18 +837,23 @@
     
     catRadio.addEventListener('change', updateType);
     dogRadio.addEventListener('change', updateType);
+    bothRadio.addEventListener('change', updateType);
     renderQuestionsByType('gato');
     
-    // coleta todos os dados
+    // coleta todos os dados (incluindo endereço e quantidade)
     function collectFormData() {
         const ownerName = document.getElementById('ownerName').value.trim();
+        const address = document.getElementById('address').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const email = document.getElementById('email').value.trim();
+        const petCount = document.getElementById('petCount').value;
         const petName = document.getElementById('petName').value.trim();
         const age = document.getElementById('age').value.trim();
         const breed = document.getElementById('breed').value.trim() || "Não informado";
         const notes = document.getElementById('notes').value.trim() || "Nenhuma observação";
-        const petType = catRadio.checked ? "Gato 🐱" : "Cachorro 🐶";
+        let petType = "Gato 🐱";
+        if(dogRadio.checked) petType = "Cachorro 🐶";
+        if(bothRadio.checked) petType = "Ambos (Gato e Cachorro) 🐱🐶";
         
         const dynamicAnswers = [];
         const allDynamic = dynamicContainer.querySelectorAll('input, textarea');
@@ -785,15 +873,16 @@
                 }
             }
         });
-        return { ownerName, phone, email, petName, age, breed, notes, petType, dynamicAnswers };
+        return { ownerName, address, phone, email, petCount, petName, age, breed, notes, petType, dynamicAnswers };
     }
     
     function validateForm(data) {
         if(!data.ownerName) return "Por favor, informe seu nome completo.";
+        if(!data.address) return "Por favor, informe seu endereço completo para agendamento.";
         if(!data.phone) return "Por favor, informe seu telefone/WhatsApp.";
         if(!data.email) return "Informe seu e-mail.";
         if(!data.email.includes('@') || !data.email.includes('.')) return "E-mail inválido.";
-        if(!data.petName) return "Qual o nome do seu pet?";
+        if(!data.petName) return "Informe o nome do(s) seu(s) pet(s).";
         if(!data.age) return "Informe a idade do pet.";
         return null;
     }
@@ -801,24 +890,26 @@
     function generateWhatsMsg(data) {
         let msg = "🐾 *NOVO PEDIDO - CAT SITTER CARE* 🐾%0A%0A";
         msg += `👤 *Responsável:* ${data.ownerName}%0A`;
+        msg += `📍 *Endereço:* ${data.address}%0A`;
         msg += `📱 *Telefone:* ${data.phone}%0A`;
         msg += `✉️ *E-mail:* ${data.email}%0A`;
-        msg += `🐕 *Pet:* ${data.petName}%0A`;
+        msg += `🐾 *Quantidade de pets:* ${data.petCount}%0A`;
+        msg += `🐕 *Nome(s) do(s) pet(s):* ${data.petName}%0A`;
         msg += `🐾 *Tipo:* ${data.petType}%0A`;
-        msg += `📅 *Idade:* ${data.age}%0A`;
+        msg += `📅 *Idade aproximada:* ${data.age}%0A`;
         msg += `🏷️ *Raça:* ${data.breed}%0A%0A`;
         msg += `📋 *DETALHES IMPORTANTES:*%0A`;
         if(data.dynamicAnswers.length) msg += data.dynamicAnswers.join('%0A') + '%0A%0A';
         else msg += `• Nenhum detalhe extra informado%0A%0A`;
-        msg += `💬 *Observações:* ${data.notes}%0A%0A`;
+        msg += `💬 *Observações adicionais:* ${data.notes}%0A%0A`;
         msg += `🌿 *Enviado em:* ${new Date().toLocaleString('pt-BR')}%0A`;
-        msg += `💚 *Aguardando contato para agendar o cuidado especial!*`;
+        msg += `💚 *Aguardando contato para agendar os cuidados especiais!*`;
         return msg;
     }
     
     const whatsBtn = document.getElementById('whatsappBtn');
     const modal = document.getElementById('successModal');
-    const closeModal = document.getElementById('closeModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
     const clearBtn = document.getElementById('clearBtn');
     const whatsNumber = "5511984897049";
     
@@ -855,13 +946,17 @@
     clearBtn.addEventListener('click', () => {
         if(confirm('✨ Deseja limpar todos os campos do formulário?')) {
             document.getElementById('ownerName').value = '';
+            document.getElementById('address').value = '';
             document.getElementById('phone').value = '';
             document.getElementById('email').value = '';
+            document.getElementById('petCount').value = '1';
             document.getElementById('petName').value = '';
             document.getElementById('age').value = '';
             document.getElementById('breed').value = '';
             document.getElementById('notes').value = '';
             catRadio.checked = true;
+            bothRadio.checked = false;
+            dogRadio.checked = false;
             updateType();
             const successTip = document.createElement('div');
             successTip.className = 'error-message';
@@ -877,7 +972,7 @@
     function closeModalFn() {
         modal.classList.remove('active');
     }
-    closeModal.addEventListener('click', closeModalFn);
+    closeModalBtn.addEventListener('click', closeModalFn);
     modal.addEventListener('click', (e) => { if(e.target === modal) closeModalFn(); });
     
     // animação suave nos campos
@@ -888,7 +983,7 @@
         });
     });
     
-    console.log("✨ Cat Sitter Care - Interface moderna e responsiva carregada ✨");
+    console.log("✨ Cat Sitter Care - Interface moderna com endereço e quantidade de pets ✨");
 </script>
 </body>
 </html>

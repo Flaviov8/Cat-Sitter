@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Pet Sitter  | Formulário Premium</title>
+    <title>Pet Sitter | Formulário Premium</title>
     <style>
         * {
             margin: 0;
@@ -21,7 +21,7 @@
             overflow-x: hidden;
         }
 
-        /* overlay decorativo sutil */
+        /* overlay decorativo com imagem de fundo */
         body::before {
             content: '';
             position: fixed;
@@ -30,8 +30,10 @@
             right: 0;
             bottom: 0;
             background-image: url('Gato.jpg');
-            background-repeat: repeat;
-            background-size: none;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
             pointer-events: none;
             z-index: 0;
         }
@@ -424,6 +426,7 @@
             border-radius: 1.2rem;
             padding: 0.3rem;
             border: 2px solid #cfe9cf;
+            flex-wrap: wrap;
         }
 
         .pet-counter button {
@@ -459,6 +462,21 @@
             border: none;
             width: 70px;
             padding: 0.6rem;
+        }
+
+        @media (max-width: 480px) {
+            .pet-counter {
+                justify-content: center;
+            }
+            .pet-counter button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .pet-counter input {
+                width: 60px;
+                font-size: 1.1rem;
+            }
         }
 
         /* modal refinado */
@@ -622,7 +640,7 @@
             <input type="text" id="ownerName" placeholder="Como podemos te chamar?" required>
         </div>
         
-        <!-- ENDEREÇO COMPLETO DO TUTOR (NOVO) -->
+        <!-- ENDEREÇO COMPLETO DO TUTOR -->
         <div class="form-group">
             <label><i>📍</i> Endereço completo</label>
             <input type="text" id="address" placeholder="Rua, número, bairro, cidade - CEP" required>
@@ -639,7 +657,7 @@
             </div>
         </div>
         
-        <!-- QUANTIDADE DE PETS (NOVO) -->
+        <!-- QUANTIDADE DE PETS -->
         <div class="form-group">
             <label><i>🐕🐱</i> Quantidade de pets</label>
             <div class="pet-counter">
@@ -884,11 +902,12 @@
         if(!data.email.includes('@') || !data.email.includes('.')) return "E-mail inválido.";
         if(!data.petName) return "Informe o nome do(s) seu(s) pet(s).";
         if(!data.age) return "Informe a idade do pet.";
+        if(parseInt(data.petCount) < 1) return "Informe a quantidade de pets (mínimo 1).";
         return null;
     }
     
     function generateWhatsMsg(data) {
-        let msg = "🐾 *NOVO PEDIDO - CAT SITTER CARE* 🐾%0A%0A";
+        let msg = "🐾 *NOVO PEDIDO - PET SITTER* 🐾%0A%0A";
         msg += `👤 *Responsável:* ${data.ownerName}%0A`;
         msg += `📍 *Endereço:* ${data.address}%0A`;
         msg += `📱 *Telefone:* ${data.phone}%0A`;
@@ -983,7 +1002,7 @@
         });
     });
     
-    console.log("✨ Cat Sitter Care - Interface moderna com endereço e quantidade de pets ✨");
+    console.log("✨ Pet Sitter - Interface moderna com endereço e quantidade de pets ✨");
 </script>
 </body>
 </html>

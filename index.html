@@ -3,8 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>🔐 Pet Sitter | Sistema de Login Premium</title>
+    <title>🐾 Pet Sitter | Sistema Moderno de Gestão</title>
     <style>
+        /* CSS Moderno com Variáveis e Reset */
+        :root {
+            --primary-50: #f0fdf4;
+            --primary-100: #dcfce7;
+            --primary-200: #bbf7d0;
+            --primary-300: #86efac;
+            --primary-400: #4ade80;
+            --primary-500: #22c55e;
+            --primary-600: #16a34a;
+            --primary-700: #15803d;
+            --primary-800: #166534;
+            --primary-900: #14532d;
+            --secondary-500: #f59e0b;
+            --secondary-600: #d97706;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.5rem;
+            --radius-xl: 2rem;
+            --radius-full: 9999px;
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,14 +56,16 @@
         }
 
         body {
-            font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(145deg, #e9f5ea 0%, #cde8dc 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
             min-height: 100vh;
             padding: clamp(1rem, 5vw, 2.5rem);
             position: relative;
             overflow-x: hidden;
+            color: var(--gray-800);
         }
 
+        /* Background animado moderno */
         body::before {
             content: '';
             position: fixed;
@@ -28,55 +73,131 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('Gato.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.15;
+            background: radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.05) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
+            animation: gradientShift 15s ease infinite;
         }
 
+        @keyframes gradientShift {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Patinhas flutuantes com animação 3D */
         .floating-paw {
             position: fixed;
-            font-size: 2.5rem;
-            opacity: 0.08;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            opacity: 0.06;
             pointer-events: none;
             z-index: 0;
-            animation: floatModern 25s infinite alternate ease-in-out;
+            animation: float3D 20s infinite alternate ease-in-out;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.02));
+            will-change: transform;
         }
 
-        @keyframes floatModern {
+        @keyframes float3D {
             0% {
                 transform: translate(0, 0) rotate(0deg) scale(1);
             }
             100% {
-                transform: translate(35px, -25px) rotate(12deg) scale(1.05);
+                transform: translate(50px, -30px) rotate(15deg) scale(1.2);
             }
         }
 
-        /* Container principal */
+        /* Container principal com Glassmorphism 2.0 */
         .login-container, .admin-container, .user-container {
             max-width: 500px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(8px);
-            border-radius: 2rem;
-            box-shadow: 0 30px 50px -20px rgba(46, 125, 50, 0.35), 0 0 0 1px rgba(76, 175, 80, 0.15);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-2xl), 0 0 0 1px rgba(34, 197, 94, 0.1);
             overflow: hidden;
             position: relative;
             z-index: 2;
-            animation: fadeSlideUp 0.5s ease-out;
+            animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .admin-container, .user-container {
-            max-width: 1200px;
+            max-width: 1400px;
         }
 
-        @keyframes fadeSlideUp {
+        @keyframes slideUpFade {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Hero section moderna */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-600) 50%, var(--primary-500) 100%);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotateGlow 20s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-top: 12px;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Formulários modernos */
+        form {
+            padding: clamp(1.5rem, 5vw, 2.5rem);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.5s ease-out backwards;
+            animation-delay: calc(var(--order, 0) * 0.05s);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -84,116 +205,94 @@
             }
         }
 
-        .hero {
-            background: linear-gradient(125deg, #1b5e20 0%, #2e7d32 40%, #43a047 100%);
-            padding: 2rem;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: clamp(1.8rem, 6vw, 2.4rem);
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .hero p {
-            font-size: 1rem;
-            opacity: 0.95;
-            margin-top: 10px;
-        }
-
-        form {
-            padding: clamp(1.5rem, 5vw, 2.5rem);
-        }
-
-        .form-group {
-            margin-bottom: 1.6rem;
-        }
-
         label {
-            display: block;
-            font-weight: 600;
-            color: #1b5e20;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
+            color: var(--primary-700);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            letter-spacing: -0.01em;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 0.9rem 1.1rem;
+            padding: 0.9rem 1.2rem;
             font-family: inherit;
             font-size: 1rem;
-            border: 2px solid #e0f2e0;
-            background: #ffffff;
-            border-radius: 1.2rem;
-            transition: all 0.25s ease;
+            border: 2px solid var(--gray-200);
+            background: white;
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-base);
             outline: none;
-            color: #1e3a1e;
+            color: var(--gray-800);
         }
 
         input:focus, select:focus, textarea:focus {
-            border-color: #4caf50;
-            box-shadow: 0 0 0 5px rgba(76, 175, 80, 0.2);
-            transform: scale(1.01);
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Botões modernos com efeito hover 3D */
+        .btn-primary, .btn-secondary, .btn-danger, .btn-warning {
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
-            background: linear-gradient(105deg, #4caf50, #2e7d32);
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
             color: white;
-            border: none;
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: 3rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 1rem;
+            box-shadow: var(--shadow-md);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
         }
 
         .btn-secondary {
-            background: rgba(100, 100, 100, 0.1);
-            color: #2e7d32;
-            border: 2px solid #81c784;
-            padding: 0.8rem;
-            font-weight: 600;
-            border-radius: 3rem;
-            cursor: pointer;
-            transition: all 0.2s;
+            background: var(--gray-100);
+            color: var(--primary-700);
+            border: 2px solid var(--primary-200);
         }
 
         .btn-secondary:hover {
-            background: #e8f5e9;
+            background: var(--primary-50);
             transform: translateY(-2px);
         }
 
         .btn-danger {
-            background: linear-gradient(105deg, #f44336, #d32f2f);
+            background: linear-gradient(135deg, var(--danger), #dc2626);
             color: white;
         }
 
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #ea580c);
+            color: white;
+        }
+
+        /* Links modernos */
         .links {
             display: flex;
             justify-content: space-between;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             gap: 1rem;
             flex-wrap: wrap;
         }
@@ -201,51 +300,61 @@
         .links button {
             background: none;
             border: none;
-            color: #4caf50;
+            color: var(--primary-600);
             cursor: pointer;
             font-size: 0.9rem;
             font-weight: 500;
-            text-decoration: underline;
+            transition: all var(--transition-fast);
+            padding: 0.5rem;
         }
 
         .links button:hover {
-            color: #2e7d32;
+            color: var(--primary-800);
+            transform: translateX(4px);
         }
 
+        /* Mensagens com animação */
         .error-message, .success-message {
-            padding: 12px 18px;
-            border-radius: 1.5rem;
-            font-size: 0.85rem;
+            padding: 1rem 1.2rem;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
             margin-bottom: 1rem;
             font-weight: 500;
-            animation: shakeError 0.3s ease;
+            animation: slideInRight 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            backdrop-filter: blur(8px);
         }
 
         .error-message {
-            background: #ffefef;
-            color: #c62828;
-            border-left: 5px solid #ef5350;
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border-left: 4px solid var(--danger);
         }
 
         .success-message {
-            background: #e8f5e9;
-            color: #2e7d32;
-            border-left: 5px solid #4caf50;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border-left: 4px solid var(--success);
         }
 
-        @keyframes shakeError {
-            0%,100%{ transform: translateX(0);}
-            25%{ transform: translateX(-5px);}
-            75%{ transform: translateX(5px);}
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
+        /* Modal moderno */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(30, 40, 20, 0.7);
+            background-color: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
@@ -253,7 +362,7 @@
             z-index: 1000;
             visibility: hidden;
             opacity: 0;
-            transition: all 0.25s ease;
+            transition: all var(--transition-base);
         }
 
         .modal-overlay.active {
@@ -265,317 +374,216 @@
             background: white;
             max-width: 90%;
             width: 90%;
-            max-height: 90vh;
+            max-height: 85vh;
             overflow-y: auto;
-            border-radius: 2rem;
+            border-radius: var(--radius-xl);
             padding: 2rem;
-            transform: scale(0.92);
-            transition: transform 0.3s;
+            transform: scale(0.95);
+            transition: transform var(--transition-base);
+            box-shadow: var(--shadow-2xl);
         }
 
         .active .modal-card {
             transform: scale(1);
         }
 
-        .modal-card h3 {
-            font-size: 1.5rem;
-            color: #1b5e20;
-            margin-bottom: 1rem;
-        }
-
-        .modal-card button {
-            margin-top: 1rem;
-        }
-
-        /* Tabela de usuários */
+        /* Tabelas modernas */
         .users-table {
             width: 100%;
             overflow-x: auto;
             margin-top: 1.5rem;
+            border-radius: var(--radius-lg);
+            background: white;
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 1rem;
-            overflow: hidden;
+            border-collapse: separate;
+            border-spacing: 0;
         }
 
         th, td {
             padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid #e0f2e0;
+            border-bottom: 1px solid var(--gray-200);
         }
 
         th {
-            background: #f1f8e9;
-            color: #1b5e20;
+            background: var(--primary-50);
+            color: var(--primary-700);
             font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .admin-actions, .user-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
+        tr:hover {
+            background: var(--gray-50);
+            transition: background var(--transition-fast);
         }
 
-        .admin-actions button, .user-actions button {
-            flex: 1;
-            padding: 0.8rem;
-        }
-
-        .logout-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #4caf50;
-            padding: 0.6rem 1.2rem;
-            border-radius: 2rem;
-            cursor: pointer;
-            font-weight: 600;
-            color: #2e7d32;
-            z-index: 10;
-            backdrop-filter: blur(4px);
-        }
-
-        .logout-btn:hover {
-            background: #4caf50;
-            color: white;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .user-role {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 1rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .role-admin {
-            background: #ff9800;
-            color: white;
-        }
-
-        .role-user {
-            background: #4caf50;
-            color: white;
-        }
-
-        /* Cards para usuário comum */
+        /* Cards modernos */
         .dashboard-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
             margin-top: 1.5rem;
         }
 
         .info-card {
             background: white;
-            border-radius: 1.5rem;
+            border-radius: var(--radius-lg);
             padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
+            transition: all var(--transition-base);
             cursor: pointer;
-            border: 2px solid #e0f2e0;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
         }
 
         .info-card:hover {
-            transform: translateY(-5px);
-            border-color: #4caf50;
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-300);
         }
 
-        .info-card h3 {
-            color: #1b5e20;
-            margin-bottom: 0.8rem;
-            font-size: 1.3rem;
-        }
-
-        .info-card p {
-            color: #666;
+        .card-icon {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
         }
 
-        .info-card .card-icon {
-            font-size: 2.5rem;
+        .info-card h3 {
+            color: var(--primary-700);
             margin-bottom: 0.5rem;
+            font-size: 1.25rem;
         }
 
-        /* Estilos para o formulário Pet Sitter dentro do modal */
-        .pet-form-container {
-            max-width: 100%;
+        /* Badges de status */
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
-        .pet-form-container .row-2col {
+        .status-pendente {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .status-aprovado {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .role-admin {
+            background: linear-gradient(135deg, var(--warning), #ea580c);
+            color: white;
+        }
+
+        .role-user {
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+            color: white;
+        }
+
+        /* Ações em tabela */
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .action-buttons button {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.75rem;
+            border-radius: var(--radius-md);
+        }
+
+        /* Layout responsivo avançado */
+        .grid-2cols {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
 
-        .pet-form-container .row-3col {
+        .grid-3cols {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
         }
 
-        .pet-form-container .pet-type-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 6px;
-        }
-
-        .pet-form-container .pet-option {
-            flex: 1;
-            min-width: 130px;
-        }
-
-        .pet-form-container .pet-option input {
-            display: none;
-        }
-
-        .pet-form-container .pet-option label {
-            background: #f5faf2;
-            border-radius: 3rem;
-            padding: 0.85rem 0.5rem;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 600;
-            border: 2px solid #cfe9cf;
-            transition: all 0.25s;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .pet-form-container .pet-option input:checked + label {
-            background: linear-gradient(105deg, #4caf50, #2e7d32);
-            border-color: #1b5e20;
-            color: white;
-        }
-
-        .pet-form-container .pet-size-group {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            margin-top: 6px;
-        }
-
-        .pet-form-container .size-option {
-            flex: 1;
-            min-width: 80px;
-        }
-
-        .pet-form-container .size-option input {
-            display: none;
-        }
-
-        .pet-form-container .size-option label {
-            background: #f5faf2;
-            border-radius: 2rem;
-            padding: 0.7rem 0.5rem;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 500;
-            border: 2px solid #cfe9cf;
-        }
-
-        .pet-form-container .size-option input:checked + label {
-            background: linear-gradient(105deg, #4caf50, #2e7d32);
-            color: white;
-        }
-
-        .pet-form-container .radio-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 8px;
-        }
-
-        .pet-form-container .radio-group label {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-            cursor: pointer;
-            background: white;
-            padding: 0.45rem 1.2rem;
-            border-radius: 60px;
-            border: 1px solid #cfe9cf;
-        }
-
-        .pet-form-container .faq-section {
-            background: rgba(241, 249, 235, 0.8);
-            border-radius: 1.8rem;
-            padding: 1.2rem 1.5rem;
-            margin: 1.8rem 0 1.2rem;
-            border-left: 6px solid #4caf50;
-        }
-
-        .pet-form-container .pet-counter {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: #f9fef7;
-            border-radius: 1.2rem;
-            padding: 0.3rem;
-            border: 2px solid #cfe9cf;
-        }
-
-        .pet-form-container .pet-counter button {
-            width: 44px;
-            height: 44px;
-            border-radius: 60px;
-            border: none;
-            background: #4caf50;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .pet-form-container .pet-counter input {
-            text-align: center;
-            width: 70px;
-            background: white;
-            border: none;
-        }
-
-        .other-pet-field.hidden {
-            display: none;
-        }
-
-        .other-pet-field {
-            margin-top: 12px;
-        }
-
-        .welcome-badge {
-            background: rgba(255,255,255,0.2);
-            border-radius: 2rem;
-            padding: 0.3rem 1rem;
-            display: inline-block;
-            margin-top: 0.5rem;
-        }
-
         @media (max-width: 768px) {
-            .admin-container, .user-container {
-                margin: 1rem;
-            }
-            th, td {
-                padding: 0.6rem;
-                font-size: 0.85rem;
-            }
-            .pet-form-container .row-2col,
-            .pet-form-container .row-3col {
+            .grid-2cols, .grid-3cols {
                 grid-template-columns: 1fr;
             }
+            
+            .admin-container, .user-container {
+                margin: 0.5rem;
+            }
+            
+            th, td {
+                padding: 0.75rem;
+                font-size: 0.875rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Scrollbar moderna */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: var(--radius-full);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-400);
+            border-radius: var(--radius-full);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-500);
+        }
+
+        /* Classes utilitárias */
+        .hidden {
+            display: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-4 {
+            margin-top: 1rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        /* Animações de loading */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading {
+            animation: pulse 1.5s ease-in-out infinite;
         }
     </style>
 </head>
@@ -586,16 +594,20 @@
 <!-- Tela de Login -->
 <div id="loginScreen" class="login-container">
     <div class="hero">
-        <h1>🐾 Pet Sitter 🐾</h1>
-        <p>💚 Sistema de Gestão de Cuidados 💚</p>
+        <h1>
+            <span>🐾</span>
+            Pet Sitter
+            <span>🐾</span>
+        </h1>
+        <p>💚 Cuidado premium com tecnologia de ponta 💚</p>
     </div>
     <form id="loginForm">
-        <div class="form-group">
-            <label><i>👤</i> Nome de usuário</label>
+        <div class="form-group" style="--order: 1">
+            <label>👤 Nome de usuário</label>
             <input type="text" id="loginUsername" placeholder="Digite seu nome de usuário" required autocomplete="username">
         </div>
-        <div class="form-group">
-            <label><i>🔐</i> Senha</label>
+        <div class="form-group" style="--order: 2">
+            <label>🔐 Senha</label>
             <input type="password" id="loginPassword" placeholder="Digite sua senha" required autocomplete="current-password">
         </div>
         <button type="submit" class="btn-primary">🔓 Entrar no Sistema</button>
@@ -606,84 +618,56 @@
     </form>
 </div>
 
-<!-- Tela de Registro de Novo Usuário -->
+<!-- Tela de Registro -->
 <div id="registerScreen" class="login-container hidden">
     <div class="hero">
         <h1>📝 Criar Nova Conta</h1>
         <p>🐱 Junte-se à nossa família Pet Sitter</p>
     </div>
     <form id="registerForm">
-        <div class="form-group">
-            <label><i>👤</i> Nome de usuário</label>
-            <input type="text" id="regUsername" placeholder="Escolha um nome de usuário" required>
-        </div>
-        <div class="form-group">
-            <label><i>🔐</i> Senha</label>
-            <input type="password" id="regPassword" placeholder="Crie uma senha forte" required>
-        </div>
-        <div class="form-group">
-            <label><i>✅</i> Confirmar senha</label>
-            <input type="password" id="regConfirmPassword" placeholder="Digite a senha novamente" required>
-        </div>
+        <div class="form-group"><label>👤 Nome de usuário</label><input type="text" id="regUsername" required></div>
+        <div class="form-group"><label>🔐 Senha</label><input type="password" id="regPassword" required></div>
+        <div class="form-group"><label>✅ Confirmar senha</label><input type="password" id="regConfirmPassword" required></div>
         <button type="submit" class="btn-primary">✅ Criar Conta</button>
-        <div class="links">
-            <button type="button" id="backToLoginFromReg">← Voltar para o login</button>
-        </div>
+        <div class="links"><button type="button" id="backToLoginFromReg">← Voltar para o login</button></div>
     </form>
 </div>
 
-<!-- Tela de Redefinição de Senha -->
+<!-- Tela de Redefinição -->
 <div id="resetPasswordScreen" class="login-container hidden">
-    <div class="hero">
-        <h1>🔑 Redefinir Senha</h1>
-        <p>Recupere o acesso à sua conta</p>
-    </div>
+    <div class="hero"><h1>🔑 Redefinir Senha</h1><p>Recupere o acesso à sua conta</p></div>
     <form id="resetPasswordForm">
-        <div class="form-group">
-            <label><i>👤</i> Nome de usuário</label>
-            <input type="text" id="resetUsername" placeholder="Digite seu nome de usuário" required>
-        </div>
-        <div class="form-group">
-            <label><i>🔐</i> Nova senha</label>
-            <input type="password" id="resetNewPassword" placeholder="Digite a nova senha" required>
-        </div>
-        <div class="form-group">
-            <label><i>✅</i> Confirmar nova senha</label>
-            <input type="password" id="resetConfirmPassword" placeholder="Confirme a nova senha" required>
-        </div>
+        <div class="form-group"><label>👤 Nome de usuário</label><input type="text" id="resetUsername" required></div>
+        <div class="form-group"><label>🔐 Nova senha</label><input type="password" id="resetNewPassword" required></div>
+        <div class="form-group"><label>✅ Confirmar nova senha</label><input type="password" id="resetConfirmPassword" required></div>
         <button type="submit" class="btn-primary">🔄 Redefinir Senha</button>
-        <div class="links">
-            <button type="button" id="backToLoginFromReset">← Voltar para o login</button>
-        </div>
+        <div class="links"><button type="button" id="backToLoginFromReset">← Voltar para o login</button></div>
     </form>
 </div>
 
 <!-- Tela do Administrador -->
 <div id="adminScreen" class="admin-container hidden">
-    <button id="logoutBtn" class="logout-btn">🚪 Sair do Sistema</button>
-    <div class="hero">
-        <h1>👑 Painel do Administrador 👑</h1>
-        <p id="welcomeUserAdmin">Bem-vindo, </p>
-        <div class="welcome-badge">🔧 Controle total do sistema</div>
-    </div>
+    <button id="logoutBtn" class="btn-secondary" style="position: fixed; top: 1rem; right: 1rem; z-index: 100;">🚪 Sair</button>
+    <div class="hero"><h1>👑 Painel do Administrador</h1><p id="welcomeUserAdmin"></p></div>
     <div style="padding: 2rem;">
-        <div class="admin-actions">
-            <button id="showCreateUserModalBtn" class="btn-primary">➕ Criar Novo Usuário</button>
-            <button id="showFormularioPetBtnAdmin" class="btn-primary">🐕 Formulário Pet Sitter</button>
+        <div class="grid-2cols" style="margin-bottom: 2rem;">
+            <button id="showCreateUserModalBtn" class="btn-primary">➕ Criar Usuário</button>
+            <button id="showFormularioPetBtnAdmin" class="btn-primary">🐕 Novo Pedido</button>
         </div>
+        
         <div class="users-table">
-            <h3 style="color: #1b5e20; margin-bottom: 1rem;">📋 Gerenciamento de Usuários</h3>
+            <h3 style="color: var(--primary-700); margin-bottom: 1rem;">📋 Todos os Pedidos</h3>
+            <table id="allRequestsTable">
+                <thead><tr><th>Data</th><th>Cliente</th><th>Pet(s)</th><th>Telefone</th><th>Status</th><th>Ações</th></tr></thead>
+                <tbody id="allRequestsBody"></tbody>
+            </table>
+        </div>
+        
+        <div class="users-table" style="margin-top: 2rem;">
+            <h3 style="color: var(--primary-700); margin-bottom: 1rem;">👥 Usuários Cadastrados</h3>
             <table id="usersTable">
-                <thead>
-                    <tr>
-                        <th>Usuário</th>
-                        <th>Tipo</th>
-                        <th>Data de Cadastro</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="usersTableBody">
-                </tbody>
+                <thead><tr><th>Usuário</th><th>Tipo</th><th>Ações</th></tr></thead>
+                <tbody id="usersTableBody"></tbody>
             </table>
         </div>
     </div>
@@ -691,795 +675,569 @@
 
 <!-- Tela do Usuário Comum -->
 <div id="userScreen" class="user-container hidden">
-    <button id="logoutBtnUser" class="logout-btn">🚪 Sair do Sistema</button>
-    <div class="hero">
-        <h1>🐾 Área do Cliente 🐾</h1>
-        <p id="welcomeUserCommon">Bem-vindo, </p>
-        <div class="welcome-badge">🐕 Seu espaço de cuidados</div>
-    </div>
+    <button id="logoutBtnUser" class="btn-secondary" style="position: fixed; top: 1rem; right: 1rem; z-index: 100;">🚪 Sair</button>
+    <div class="hero"><h1>🐾 Área do Cliente</h1><p id="welcomeUserCommon"></p></div>
     <div style="padding: 2rem;">
-        <div class="user-actions">
-            <button id="showFormularioPetBtnUser" class="btn-primary">🐕 Solicitar Serviço Pet Sitter</button>
-            <button id="showMyRequestsBtn" class="btn-secondary">📋 Meus Pedidos</button>
-        </div>
+        <button id="showFormularioPetBtnUser" class="btn-primary" style="width: 100%; margin-bottom: 2rem;">🐕 Novo Pedido</button>
         
         <div class="dashboard-cards">
             <div class="info-card" id="cardNewRequest">
                 <div class="card-icon">🐾</div>
                 <h3>Novo Pedido</h3>
-                <p>Agende um novo serviço de cuidado para seu pet</p>
-                <small style="color: #4caf50;">Clique para começar →</small>
+                <p>Agende um novo serviço para seu pet</p>
             </div>
-            <div class="info-card" id="cardMyPets">
-                <div class="card-icon">🐕🐱</div>
-                <h3>Meus Pets</h3>
-                <p>Gerencie as informações dos seus animais</p>
-                <small style="color: #4caf50;">Em breve</small>
-            </div>
-            <div class="info-card" id="cardHistory">
-                <div class="card-icon">📅</div>
-                <h3>Histórico</h3>
-                <p>Veja todos os serviços já realizados</p>
-                <small style="color: #4caf50;">Em breve</small>
+            <div class="info-card" id="cardMyRequests">
+                <div class="card-icon">📋</div>
+                <h3>Meus Pedidos</h3>
+                <p>Visualize e edite seus pedidos</p>
             </div>
         </div>
         
-        <!-- Seção de pedidos do usuário -->
         <div id="userRequestsSection" class="users-table hidden" style="margin-top: 2rem;">
-            <h3 style="color: #1b5e20; margin-bottom: 1rem;">📋 Meus Pedidos</h3>
+            <h3 style="color: var(--primary-700); margin-bottom: 1rem;">📋 Meus Pedidos</h3>
             <table id="userRequestsTable">
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Pet(s)</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="userRequestsBody">
-                    <tr>
-                        <td colspan="4" style="text-align: center;">Nenhum pedido encontrado</td>
-                    </tr>
-                </tbody>
+                <thead><tr><th>Data</th><th>Pet(s)</th><th>Status</th><th>Ações</th></tr></thead>
+                <tbody id="userRequestsBody"></tbody>
             </table>
         </div>
     </div>
 </div>
 
-<!-- Modal para Criar Usuário (Administrador) -->
+<!-- Modais -->
 <div id="createUserModal" class="modal-overlay">
-    <div class="modal-card">
-        <h3>➕ Criar Novo Usuário</h3>
+    <div class="modal-card"><h3>➕ Criar Novo Usuário</h3>
         <form id="adminCreateUserForm">
-            <div class="form-group">
-                <label><i>👤</i> Nome de usuário</label>
-                <input type="text" id="adminNewUsername" placeholder="Nome do usuário" required>
-            </div>
-            <div class="form-group">
-                <label><i>🔐</i> Senha</label>
-                <input type="password" id="adminNewPassword" placeholder="Senha" required>
-            </div>
-            <div class="form-group">
-                <label><i>👑</i> Tipo de usuário</label>
-                <select id="adminNewRole">
-                    <option value="user">👤 Usuário Comum</option>
-                    <option value="admin">👑 Administrador</option>
-                </select>
-            </div>
-            <button type="submit" class="btn-primary">✅ Criar Usuário</button>
-            <button type="button" id="closeCreateUserModal" class="btn-secondary" style="margin-top: 0.5rem;">Cancelar</button>
+            <div class="form-group"><label>Nome de usuário</label><input type="text" id="adminNewUsername" required></div>
+            <div class="form-group"><label>Senha</label><input type="password" id="adminNewPassword" required></div>
+            <div class="form-group"><label>Tipo</label><select id="adminNewRole"><option value="user">Usuário Comum</option><option value="admin">Administrador</option></select></div>
+            <button type="submit" class="btn-primary">Criar</button>
+            <button type="button" id="closeCreateUserModal" class="btn-secondary">Cancelar</button>
         </form>
     </div>
 </div>
 
-<!-- Modal para Deletar Usuário -->
-<div id="deleteUserModal" class="modal-overlay">
-    <div class="modal-card">
-        <h3>⚠️ Confirmar Exclusão</h3>
-        <p>Tem certeza que deseja excluir o usuário <strong id="deleteUsername"></strong>?</p>
-        <p style="color: #f44336; font-size: 0.9rem;">Esta ação não pode ser desfeita!</p>
-        <button id="confirmDeleteBtn" class="btn-primary btn-danger">🗑️ Sim, Excluir</button>
-        <button id="closeDeleteModal" class="btn-secondary" style="margin-top: 0.5rem;">Cancelar</button>
-    </div>
+<div id="editRequestModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 800px;"><h3>✏️ Editar Pedido</h3><div id="editFormContent"></div><button id="closeEditModal" class="btn-secondary">Cancelar</button></div>
 </div>
 
-<!-- Modal do Formulário Pet Sitter -->
 <div id="petFormModal" class="modal-overlay">
     <div class="modal-card" style="max-width: 900px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-            <h3>🐾 Formulário de Cadastro - Pet Sitter 🐾</h3>
-            <button id="closePetFormModal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
-        </div>
-        <div id="petFormContent" class="pet-form-container"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;"><h3>🐾 Formulário Pet Sitter</h3><button id="closePetFormModal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button></div>
+        <div id="petFormContent"></div>
     </div>
 </div>
 
 <script>
-    // Sistema de gerenciamento de usuários com localStorage
-    let currentUser = null;
-    let users = [];
-    let userRequests = [];
+    // Modern JavaScript com ES2024 features
+    const STORAGE_KEYS = {
+        USERS: 'petSitterUsers',
+        REQUESTS: 'petSitterRequests',
+        CURRENT_USER: 'currentUser'
+    };
 
-    // Inicializar usuários padrão
-    function initUsers() {
-        const storedUsers = localStorage.getItem('petSitterUsers');
-        const storedRequests = localStorage.getItem('petSitterRequests');
-        
-        if (storedUsers) {
-            users = JSON.parse(storedUsers);
-        } else {
-            users = [
-                { id: 1, username: 'admin', password: 'admin123', role: 'admin', createdAt: new Date().toISOString() },
-                { id: 2, username: 'usuario', password: '123456', role: 'user', createdAt: new Date().toISOString() }
-            ];
-            saveUsers();
+    const WHATSAPP_NUMBER = "5511984897049";
+
+    // Classe para gerenciamento de estado
+    class AppState {
+        constructor() {
+            this.currentUser = null;
+            this.users = [];
+            this.requests = [];
+            this.loadData();
         }
-        
-        if (storedRequests) {
-            userRequests = JSON.parse(storedRequests);
-        } else {
-            userRequests = [];
-        }
-    }
 
-    function saveUsers() {
-        localStorage.setItem('petSitterUsers', JSON.stringify(users));
-    }
-
-    function saveRequests() {
-        localStorage.setItem('petSitterRequests', JSON.stringify(userRequests));
-    }
-
-    function getNextId() {
-        return users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
-    }
-
-    function login(username, password) {
-        const user = users.find(u => u.username === username && u.password === password);
-        if (user) {
-            currentUser = user;
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            return true;
-        }
-        return false;
-    }
-
-    function registerUser(username, password) {
-        if (users.find(u => u.username === username)) {
-            return false;
-        }
-        const newUser = {
-            id: getNextId(),
-            username: username,
-            password: password,
-            role: 'user',
-            createdAt: new Date().toISOString()
-        };
-        users.push(newUser);
-        saveUsers();
-        return true;
-    }
-
-    function resetPassword(username, newPassword) {
-        const user = users.find(u => u.username === username);
-        if (user) {
-            user.password = newPassword;
-            saveUsers();
-            return true;
-        }
-        return false;
-    }
-
-    function adminCreateUser(username, password, role) {
-        if (users.find(u => u.username === username)) {
-            return false;
-        }
-        const newUser = {
-            id: getNextId(),
-            username: username,
-            password: password,
-            role: role,
-            createdAt: new Date().toISOString()
-        };
-        users.push(newUser);
-        saveUsers();
-        return true;
-    }
-
-    function deleteUser(userId) {
-        const userToDelete = users.find(u => u.id === userId);
-        if (userToDelete && userToDelete.role !== 'admin') {
-            users = users.filter(u => u.id !== userId);
-            saveUsers();
-            return true;
-        }
-        return false;
-    }
-
-    function addUserRequest(request) {
-        const newRequest = {
-            id: Date.now(),
-            userId: currentUser.id,
-            username: currentUser.username,
-            ...request,
-            status: 'Pendente',
-            createdAt: new Date().toISOString()
-        };
-        userRequests.push(newRequest);
-        saveRequests();
-        return newRequest;
-    }
-
-    function getUserRequests(userId) {
-        return userRequests.filter(r => r.userId === userId).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    }
-
-    function renderUsersTable() {
-        const tbody = document.getElementById('usersTableBody');
-        if (!tbody) return;
-        
-        tbody.innerHTML = '';
-        users.forEach(user => {
-            const row = tbody.insertRow();
-            row.insertCell(0).textContent = user.username;
-            row.insertCell(1).innerHTML = `<span class="user-role ${user.role === 'admin' ? 'role-admin' : 'role-user'}">${user.role === 'admin' ? '👑 Administrador' : '🐾 Usuário'}</span>`;
-            row.insertCell(2).textContent = new Date(user.createdAt).toLocaleDateString('pt-BR');
-            const actionsCell = row.insertCell(3);
+        loadData() {
+            this.users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS) || '[]');
+            this.requests = JSON.parse(localStorage.getItem(STORAGE_KEYS.REQUESTS) || '[]');
+            this.currentUser = JSON.parse(localStorage.getItem(STORAGE_KEYS.CURRENT_USER) || 'null');
             
-            if (user.role !== 'admin' && currentUser && currentUser.role === 'admin') {
+            if (this.users.length === 0) {
+                this.users = [
+                    { id: 1, username: 'admin', password: 'admin123', role: 'admin', createdAt: new Date().toISOString() },
+                    { id: 2, username: 'usuario', password: '123456', role: 'user', createdAt: new Date().toISOString() }
+                ];
+                this.saveUsers();
+            }
+        }
+
+        saveUsers() { localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(this.users)); }
+        saveRequests() { localStorage.setItem(STORAGE_KEYS.REQUESTS, JSON.stringify(this.requests)); }
+        saveCurrentUser() { localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(this.currentUser)); }
+
+        getNextId() { return this.users.length > 0 ? Math.max(...this.users.map(u => u.id)) + 1 : 1; }
+
+        login(username, password) {
+            const user = this.users.find(u => u.username === username && u.password === password);
+            if (user) {
+                this.currentUser = user;
+                this.saveCurrentUser();
+                return true;
+            }
+            return false;
+        }
+
+        logout() {
+            this.currentUser = null;
+            localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+        }
+
+        register(username, password) {
+            if (this.users.find(u => u.username === username)) return false;
+            this.users.push({ id: this.getNextId(), username, password, role: 'user', createdAt: new Date().toISOString() });
+            this.saveUsers();
+            return true;
+        }
+
+        resetPassword(username, newPassword) {
+            const user = this.users.find(u => u.username === username);
+            if (user) { user.password = newPassword; this.saveUsers(); return true; }
+            return false;
+        }
+
+        createUser(username, password, role) {
+            if (this.users.find(u => u.username === username)) return false;
+            this.users.push({ id: this.getNextId(), username, password, role, createdAt: new Date().toISOString() });
+            this.saveUsers();
+            return true;
+        }
+
+        deleteUser(userId) {
+            const userToDelete = this.users.find(u => u.id === userId);
+            if (userToDelete && userToDelete.role !== 'admin') {
+                this.users = this.users.filter(u => u.id !== userId);
+                this.saveUsers();
+                return true;
+            }
+            return false;
+        }
+
+        addRequest(requestData) {
+            const newRequest = {
+                id: Date.now(),
+                userId: this.currentUser.id,
+                username: this.currentUser.username,
+                ...requestData,
+                status: 'Pendente',
+                createdAt: new Date().toISOString()
+            };
+            this.requests.push(newRequest);
+            this.saveRequests();
+            this.sendToWhatsApp(newRequest);
+            return newRequest;
+        }
+
+        updateRequest(requestId, updatedData) {
+            const index = this.requests.findIndex(r => r.id == requestId);
+            if (index !== -1) {
+                this.requests[index] = { ...this.requests[index], ...updatedData };
+                this.saveRequests();
+                return true;
+            }
+            return false;
+        }
+
+        sendToWhatsApp(request) {
+            const message = `🐾 *NOVO PEDIDO - PET SITTER* 🐾%0A%0A` +
+                `👤 *Cliente:* ${request.ownerName}%0A` +
+                `👤 *Usuário:* ${request.username}%0A` +
+                `📍 *Endereço:* ${request.address || 'Não informado'}%0A` +
+                `📱 *Telefone:* ${request.phone || 'Não informado'}%0A` +
+                `📧 *E-mail:* ${request.email || 'Não informado'}%0A` +
+                `🐾 *Quantidade:* ${request.petCount || '1'}%0A` +
+                `🐕 *Nome(s):* ${request.petName || 'Não informado'}%0A` +
+                `🐾 *Tipo:* ${request.petType || 'Não informado'}%0A` +
+                `📏 *Porte:* ${request.petSize || 'Não informado'}%0A` +
+                `📅 *Idade:* ${request.age || 'Não informado'}%0A` +
+                `🏷️ *Raça:* ${request.breed || 'Não informado'}%0A` +
+                `💬 *Observações:* ${request.notes || 'Nenhuma'}%0A%0A` +
+                `📅 *Data:* ${new Date(request.createdAt).toLocaleString('pt-BR')}%0A` +
+                `🔄 *Status:* ${request.status}%0A%0A` +
+                `🌿 *Enviado pelo sistema Pet Sitter*`;
+            
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+        }
+
+        getUserRequests(userId) {
+            return this.requests.filter(r => r.userId === userId).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        }
+
+        getAllRequests() {
+            return [...this.requests].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        }
+    }
+
+    // UI Controller
+    class UIController {
+        constructor(app) {
+            this.app = app;
+            this.initEventListeners();
+        }
+
+        showMessage(type, text, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const msgDiv = document.createElement('div');
+            msgDiv.className = type === 'error' ? 'error-message' : 'success-message';
+            msgDiv.innerHTML = type === 'error' ? `⚠️ ${text}` : `✅ ${text}`;
+            container.insertBefore(msgDiv, container.firstChild);
+            setTimeout(() => msgDiv.remove(), 3000);
+        }
+
+        showLoginScreen() {
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('registerScreen').classList.add('hidden');
+            document.getElementById('resetPasswordScreen').classList.add('hidden');
+            document.getElementById('adminScreen').classList.add('hidden');
+            document.getElementById('userScreen').classList.add('hidden');
+        }
+
+        showAdminScreen() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('adminScreen').classList.remove('hidden');
+            document.getElementById('userScreen').classList.add('hidden');
+            document.getElementById('welcomeUserAdmin').innerHTML = `Bem-vindo, ${this.app.currentUser.username} 👑`;
+            this.renderUsersTable();
+            this.renderAllRequests();
+        }
+
+        showUserScreen() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('adminScreen').classList.add('hidden');
+            document.getElementById('userScreen').classList.remove('hidden');
+            document.getElementById('welcomeUserCommon').innerHTML = `Bem-vindo, ${this.app.currentUser.username} 🐾`;
+            this.renderUserRequests();
+        }
+
+        renderUsersTable() {
+            const tbody = document.getElementById('usersTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            this.app.users.forEach(user => {
+                if (user.username === 'admin') return;
+                const row = tbody.insertRow();
+                row.insertCell(0).textContent = user.username;
+                row.insertCell(1).innerHTML = `<span class="role-badge role-user">Usuário</span>`;
+                const actionsCell = row.insertCell(2);
                 const deleteBtn = document.createElement('button');
                 deleteBtn.textContent = '🗑️ Excluir';
                 deleteBtn.className = 'btn-secondary';
-                deleteBtn.style.padding = '0.4rem 1rem';
-                deleteBtn.style.fontSize = '0.85rem';
-                deleteBtn.style.background = '#ffebee';
-                deleteBtn.style.borderColor = '#f44336';
-                deleteBtn.style.color = '#f44336';
-                deleteBtn.onclick = () => showDeleteUserModal(user.id, user.username);
+                deleteBtn.style.background = '#fee2e2';
+                deleteBtn.style.color = '#dc2626';
+                deleteBtn.onclick = () => {
+                    if (confirm(`Excluir usuário ${user.username}?`)) {
+                        this.app.deleteUser(user.id);
+                        this.renderUsersTable();
+                        this.showMessage('success', 'Usuário excluído!', 'adminScreen');
+                    }
+                };
                 actionsCell.appendChild(deleteBtn);
-            } else if (user.role === 'admin') {
-                actionsCell.textContent = '👑 Administrador principal';
-                actionsCell.style.color = '#ff9800';
-                actionsCell.style.fontSize = '0.85rem';
-            } else {
-                actionsCell.textContent = '—';
-            }
-        });
-    }
-
-    function renderUserRequests() {
-        const tbody = document.getElementById('userRequestsBody');
-        if (!tbody) return;
-        
-        const requests = getUserRequests(currentUser.id);
-        if (requests.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" style="text-align: center;">Nenhum pedido encontrado</td></tr>';
-            return;
+            });
         }
-        
-        tbody.innerHTML = '';
-        requests.forEach(req => {
-            const row = tbody.insertRow();
-            row.insertCell(0).textContent = new Date(req.createdAt).toLocaleString('pt-BR');
-            row.insertCell(1).textContent = req.petName || 'Não informado';
-            row.insertCell(2).innerHTML = `<span style="color: ${req.status === 'Pendente' ? '#ff9800' : '#4caf50'}">${req.status}</span>`;
-            const actionsCell = row.insertCell(3);
-            const viewBtn = document.createElement('button');
-            viewBtn.textContent = '👁️ Ver detalhes';
-            viewBtn.className = 'btn-secondary';
-            viewBtn.style.padding = '0.3rem 0.8rem';
-            viewBtn.style.fontSize = '0.8rem';
-            viewBtn.onclick = () => alert(`Detalhes do pedido:\n\nNome: ${req.ownerName}\nPet(s): ${req.petName}\nTipo: ${req.petType}\nObservações: ${req.notes || 'Nenhuma'}`);
-            actionsCell.appendChild(viewBtn);
-        });
-    }
 
-    let deleteTargetId = null;
-    
-    function showDeleteUserModal(userId, username) {
-        deleteTargetId = userId;
-        document.getElementById('deleteUsername').textContent = username;
-        document.getElementById('deleteUserModal').classList.add('active');
-    }
-    
-    function confirmDeleteUser() {
-        if (deleteTargetId) {
-            if (deleteUser(deleteTargetId)) {
-                showMessage('success', 'Usuário excluído com sucesso!', 'adminScreen');
-                renderUsersTable();
-            } else {
-                showMessage('error', 'Não é possível excluir o administrador principal!', 'adminScreen');
+        renderAllRequests() {
+            const tbody = document.getElementById('allRequestsBody');
+            if (!tbody) return;
+            const allRequests = this.app.getAllRequests();
+            if (allRequests.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center">Nenhum pedido encontrado</td></tr>';
+                return;
             }
-            document.getElementById('deleteUserModal').classList.remove('active');
-            deleteTargetId = null;
+            tbody.innerHTML = '';
+            allRequests.forEach(req => {
+                const row = tbody.insertRow();
+                row.insertCell(0).textContent = new Date(req.createdAt).toLocaleString('pt-BR');
+                row.insertCell(1).textContent = req.ownerName || req.username;
+                row.insertCell(2).textContent = req.petName || 'Não informado';
+                row.insertCell(3).textContent = req.phone || 'Não informado';
+                row.insertCell(4).innerHTML = `<span class="status-badge status-${req.status === 'Pendente' ? 'pendente' : 'aprovado'}">${req.status}</span>`;
+                const actionsCell = row.insertCell(5);
+                actionsCell.className = 'action-buttons';
+                
+                const statusBtn = document.createElement('button');
+                statusBtn.textContent = req.status === 'Pendente' ? '✅ Aprovar' : '⏳ Pendente';
+                statusBtn.className = 'btn-secondary';
+                statusBtn.onclick = () => {
+                    const newStatus = req.status === 'Pendente' ? 'Aprovado' : 'Pendente';
+                    this.app.updateRequest(req.id, { status: newStatus });
+                    this.renderAllRequests();
+                    this.showMessage('success', `Pedido ${newStatus.toLowerCase()}!`, 'adminScreen');
+                };
+                actionsCell.appendChild(statusBtn);
+                
+                const viewBtn = document.createElement('button');
+                viewBtn.textContent = '👁️ Ver';
+                viewBtn.className = 'btn-secondary';
+                viewBtn.onclick = () => alert(`📋 DETALHES\n\nCliente: ${req.ownerName}\nTelefone: ${req.phone}\nPet(s): ${req.petName}\nTipo: ${req.petType}\nPorte: ${req.petSize}\nIdade: ${req.age}\nObservações: ${req.notes || 'Nenhuma'}`);
+                actionsCell.appendChild(viewBtn);
+            });
         }
-    }
 
-    function showMessage(type, text, containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const msgDiv = document.createElement('div');
-        msgDiv.className = type === 'error' ? 'error-message' : 'success-message';
-        msgDiv.innerHTML = type === 'error' ? `⚠️ ${text}` : `✅ ${text}`;
-        container.insertBefore(msgDiv, container.firstChild);
-        setTimeout(() => msgDiv.remove(), 3000);
-    }
-
-    function showLoginScreen() {
-        document.getElementById('loginScreen').classList.remove('hidden');
-        document.getElementById('registerScreen').classList.add('hidden');
-        document.getElementById('resetPasswordScreen').classList.add('hidden');
-        document.getElementById('adminScreen').classList.add('hidden');
-        document.getElementById('userScreen').classList.add('hidden');
-    }
-
-    function showRegisterScreen() {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('registerScreen').classList.remove('hidden');
-        document.getElementById('resetPasswordScreen').classList.add('hidden');
-    }
-
-    function showResetScreen() {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('registerScreen').classList.add('hidden');
-        document.getElementById('resetPasswordScreen').classList.remove('hidden');
-    }
-
-    function showAdminScreen() {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('registerScreen').classList.add('hidden');
-        document.getElementById('resetPasswordScreen').classList.add('hidden');
-        document.getElementById('adminScreen').classList.remove('hidden');
-        document.getElementById('userScreen').classList.add('hidden');
-        document.getElementById('welcomeUserAdmin').innerHTML = `Bem-vindo, ${currentUser.username} 👑`;
-        renderUsersTable();
-    }
-
-    function showUserScreen() {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('registerScreen').classList.add('hidden');
-        document.getElementById('resetPasswordScreen').classList.add('hidden');
-        document.getElementById('adminScreen').classList.add('hidden');
-        document.getElementById('userScreen').classList.remove('hidden');
-        document.getElementById('welcomeUserCommon').innerHTML = `Bem-vindo, ${currentUser.username} 🐾`;
-        renderUserRequests();
-    }
-
-    function logout() {
-        currentUser = null;
-        localStorage.removeItem('currentUser');
-        showLoginScreen();
-        document.getElementById('loginForm').reset();
-    }
-
-    // Carregar o formulário Pet Sitter dentro do modal
-    function loadPetSitterForm(isUserView = true) {
-        const container = document.getElementById('petFormContent');
-        container.innerHTML = `
-            <form id="petSitterForm">
-                <div class="form-group">
-                    <label><i>👤</i> Seu nome completo</label>
-                    <input type="text" id="ownerName" placeholder="Como podemos te chamar?" required>
-                </div>
-                
-                <div class="form-group">
-                    <label><i>📍</i> Endereço completo</label>
-                    <input type="text" id="address" placeholder="Rua, número, bairro, cidade - CEP" required>
-                </div>
-                
-                <div class="row-2col">
-                    <div class="form-group">
-                        <label><i>📱</i> Telefone / WhatsApp</label>
-                        <input type="tel" id="phone" placeholder="(00) 00000-0000" required>
-                    </div>
-                    <div class="form-group">
-                        <label><i>✉️</i> E-mail</label>
-                        <input type="email" id="email" placeholder="seu@email.com" required>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label><i>🐕🐱</i> Quantidade de pets</label>
-                    <div class="pet-counter">
-                        <button type="button" id="decPetCount">−</button>
-                        <input type="number" id="petCount" value="1" min="1" max="10" step="1" readonly style="background: #fafef5; font-weight: 600;">
-                        <button type="button" id="incPetCount">+</button>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label><i>🐕‍🦺</i> Nome do(s) pet(s)</label>
-                    <input type="text" id="petName" placeholder="Ex: Fred, Luna, Mel (se mais de um, separe por vírgula)" required>
-                </div>
-                
-                <div class="form-group">
-                    <label><i>🐾</i> Tipo do pet</label>
-                    <div class="pet-type-group">
-                        <div class="pet-option">
-                            <input type="radio" name="petType" id="typeCat" value="gato" checked>
-                            <label for="typeCat">😺 Gato</label>
-                        </div>
-                        <div class="pet-option">
-                            <input type="radio" name="petType" id="typeDog" value="cachorro">
-                            <label for="typeDog">🐶 Cachorro</label>
-                        </div>
-                        <div class="pet-option">
-                            <input type="radio" name="petType" id="typeBoth" value="ambos">
-                            <label for="typeBoth">🐱🐶 Ambos</label>
-                        </div>
-                        <div class="pet-option">
-                            <input type="radio" name="petType" id="typeOther" value="outro">
-                            <label for="typeOther">🦜 Outro animal</label>
-                        </div>
-                    </div>
-                    <div id="otherPetField" class="other-pet-field hidden">
-                        <input type="text" id="otherPetSpecify" placeholder="Qual animal? (Ex: coelho, hamster, pássaro, etc.)">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label><i>📏</i> Porte do pet</label>
-                    <div class="pet-size-group">
-                        <div class="size-option">
-                            <input type="radio" name="petSize" id="sizeSmall" value="Pequeno (até 10kg)">
-                            <label for="sizeSmall">🐭 Pequeno</label>
-                        </div>
-                        <div class="size-option">
-                            <input type="radio" name="petSize" id="sizeMedium" value="Médio (10kg a 25kg)">
-                            <label for="sizeMedium">🐕 Médio</label>
-                        </div>
-                        <div class="size-option">
-                            <input type="radio" name="petSize" id="sizeLarge" value="Grande (25kg a 45kg)">
-                            <label for="sizeLarge">🐕‍🦺 Grande</label>
-                        </div>
-                        <div class="size-option">
-                            <input type="radio" name="petSize" id="sizeExtra" value="Gigante (acima de 45kg)">
-                            <label for="sizeExtra">🦍 Gigante</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row-2col">
-                    <div class="form-group">
-                        <label><i>📅</i> Idade aproximada</label>
-                        <input type="text" id="age" placeholder="ex: 3 anos, 8 meses" required>
-                    </div>
-                    <div class="form-group">
-                        <label><i>🏷️</i> Raça (se souber)</label>
-                        <input type="text" id="breed" placeholder="SRD, Siamês, Labrador...">
-                    </div>
-                </div>
-                
-                <div class="faq-section">
-                    <div class="faq-title">📋✨ Detalhes personalizados sobre o pet</div>
-                    <div id="dynamicQuestions" class="dynamic-questions"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label><i>💬</i> Informações extras (alergias, medos, preferências)</label>
-                    <textarea id="notes" rows="3" placeholder="Conte mais detalhes para cuidarmos com todo carinho..."></textarea>
-                </div>
-                
-                <button type="submit" class="btn-primary">💚 Enviar Solicitação</button>
-            </form>
-        `;
-        
-        setupPetFormEvents(isUserView);
-    }
-    
-    function setupPetFormEvents(isUserView = true) {
-        const petCountInput = document.getElementById('petCount');
-        document.getElementById('decPetCount')?.addEventListener('click', () => {
-            let val = parseInt(petCountInput.value);
-            if(val > 1) petCountInput.value = val - 1;
-        });
-        document.getElementById('incPetCount')?.addEventListener('click', () => {
-            let val = parseInt(petCountInput.value);
-            if(val < 10) petCountInput.value = val + 1;
-        });
-        
-        const otherRadio = document.getElementById('typeOther');
-        const otherPetField = document.getElementById('otherPetField');
-        function toggleOtherField() {
-            if(otherRadio?.checked) {
-                otherPetField.classList.remove('hidden');
-            } else {
-                otherPetField.classList.add('hidden');
-                document.getElementById('otherPetSpecify').value = '';
+        renderUserRequests() {
+            const tbody = document.getElementById('userRequestsBody');
+            if (!tbody) return;
+            const userReqs = this.app.getUserRequests(this.app.currentUser.id);
+            if (userReqs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center">Nenhum pedido encontrado</td></tr>';
+                return;
             }
+            tbody.innerHTML = '';
+            userReqs.forEach(req => {
+                const row = tbody.insertRow();
+                row.insertCell(0).textContent = new Date(req.createdAt).toLocaleString('pt-BR');
+                row.insertCell(1).textContent = req.petName || 'Não informado';
+                row.insertCell(2).innerHTML = `<span class="status-badge status-${req.status === 'Pendente' ? 'pendente' : 'aprovado'}">${req.status}</span>`;
+                const actionsCell = row.insertCell(3);
+                actionsCell.className = 'action-buttons';
+                
+                const editBtn = document.createElement('button');
+                editBtn.textContent = '✏️ Editar';
+                editBtn.className = 'btn-secondary';
+                editBtn.onclick = () => this.showEditModal(req);
+                actionsCell.appendChild(editBtn);
+                
+                const viewBtn = document.createElement('button');
+                viewBtn.textContent = '👁️ Ver';
+                viewBtn.className = 'btn-secondary';
+                viewBtn.onclick = () => alert(`📋 DETALHES\n\nPet(s): ${req.petName}\nTipo: ${req.petType}\nPorte: ${req.petSize}\nIdade: ${req.age}\nRaça: ${req.breed}\nObservações: ${req.notes || 'Nenhuma'}`);
+                actionsCell.appendChild(viewBtn);
+            });
         }
-        document.querySelectorAll('input[name="petType"]').forEach(radio => {
-            radio.addEventListener('change', toggleOtherField);
-        });
-        
-        const questionsDB = {
-            gato: [
-                { text: "🧶 O gato é castrado?", field: "castrado_gato", type: "radio" },
-                { text: "🏠 Tem acesso à rua?", field: "acesso_rua", type: "radio" },
-                { text: "💊 Vacinação em dia?", field: "vacinas_gato", type: "radio" }
-            ],
-            cachorro: [
-                { text: "🐕 O cachorro é castrado?", field: "castrado_cao", type: "radio" },
-                { text: "🚶‍♂️ Passeia na rua?", field: "passeio_cao", type: "radio" },
-                { text: "💉 Vacinas em dia?", field: "vacinas_cao", type: "radio" }
-            ],
-            ambos: [
-                { text: "🐱🐶 Todos são castrados?", field: "castrados_ambos", type: "radio" },
-                { text: "🏠 Têm acesso à rua?", field: "acesso_ambos", type: "radio" },
-                { text: "💊 Vacinas em dia?", field: "vacinas_ambos", type: "radio" }
-            ],
-            outro: [
-                { text: "🩺 Já passou por consulta veterinária?", field: "vet_visita", type: "radio" },
-                { text: "🍽️ Qual a alimentação específica?", field: "alimentacao_outro", type: "text" }
-            ]
-        };
-        
-        function renderQuestions(petType) {
-            const container = document.getElementById('dynamicQuestions');
-            if(!container) return;
-            const list = questionsDB[petType] || questionsDB.gato;
-            let html = '';
-            list.forEach((q, idx) => {
-                const uniqueId = `${q.field}_${idx}`;
-                if(q.type === 'text') {
-                    html += `<div class="question-item"><label>${q.text}</label><input type="text" id="${uniqueId}" placeholder="Descreva..."></div>`;
+
+        showEditModal(request) {
+            const container = document.getElementById('editFormContent');
+            container.innerHTML = `
+                <form id="editRequestForm">
+                    <div class="form-group"><label>🐕 Nome do(s) pet(s)</label><input type="text" id="editPetName" value="${request.petName || ''}" required></div>
+                    <div class="form-group"><label>🐾 Tipo do pet</label><input type="text" id="editPetType" value="${request.petType || ''}"></div>
+                    <div class="form-group"><label>📏 Porte</label><input type="text" id="editPetSize" value="${request.petSize || ''}"></div>
+                    <div class="form-group"><label>📅 Idade</label><input type="text" id="editAge" value="${request.age || ''}"></div>
+                    <div class="form-group"><label>🏷️ Raça</label><input type="text" id="editBreed" value="${request.breed || ''}"></div>
+                    <div class="form-group"><label>💬 Observações</label><textarea id="editNotes" rows="3">${request.notes || ''}</textarea></div>
+                    <button type="submit" class="btn-primary">💾 Salvar Alterações</button>
+                </form>
+            `;
+            
+            document.getElementById('editRequestForm').onsubmit = (e) => {
+                e.preventDefault();
+                this.app.updateRequest(request.id, {
+                    petName: document.getElementById('editPetName').value,
+                    petType: document.getElementById('editPetType').value,
+                    petSize: document.getElementById('editPetSize').value,
+                    age: document.getElementById('editAge').value,
+                    breed: document.getElementById('editBreed').value,
+                    notes: document.getElementById('editNotes').value
+                });
+                document.getElementById('editRequestModal').classList.remove('active');
+                this.renderUserRequests();
+                this.renderAllRequests();
+                this.showMessage('success', 'Pedido atualizado!', 'userScreen');
+            };
+            document.getElementById('editRequestModal').classList.add('active');
+        }
+
+        loadPetForm() {
+            const container = document.getElementById('petFormContent');
+            container.innerHTML = `
+                <form id="petSitterForm">
+                    <div class="form-group"><label>👤 Seu nome</label><input type="text" id="ownerName" required></div>
+                    <div class="form-group"><label>📍 Endereço</label><input type="text" id="address" required></div>
+                    <div class="grid-2cols">
+                        <div class="form-group"><label>📱 Telefone</label><input type="tel" id="phone" required></div>
+                        <div class="form-group"><label>✉️ E-mail</label><input type="email" id="email" required></div>
+                    </div>
+                    <div class="form-group"><label>🐕 Nome do(s) pet(s)</label><input type="text" id="petName" required></div>
+                    <div class="form-group"><label>🐾 Tipo do pet</label>
+                        <div class="grid-3cols">
+                            <div><input type="radio" name="petType" id="typeCat" value="Gato" checked> <label for="typeCat">😺 Gato</label></div>
+                            <div><input type="radio" name="petType" id="typeDog" value="Cachorro"> <label for="typeDog">🐶 Cachorro</label></div>
+                            <div><input type="radio" name="petType" id="typeOther" value="Outro"> <label for="typeOther">🦜 Outro</label></div>
+                        </div>
+                        <div id="otherPetField" class="hidden"><input type="text" id="otherPetSpecify" placeholder="Qual animal?"></div>
+                    </div>
+                    <div class="form-group"><label>📏 Porte</label>
+                        <div class="grid-3cols">
+                            <div><input type="radio" name="petSize" value="Pequeno"> <label>🐭 Pequeno</label></div>
+                            <div><input type="radio" name="petSize" value="Médio"> <label>🐕 Médio</label></div>
+                            <div><input type="radio" name="petSize" value="Grande"> <label>🐕‍🦺 Grande</label></div>
+                        </div>
+                    </div>
+                    <div class="grid-2cols">
+                        <div class="form-group"><label>📅 Idade</label><input type="text" id="age" placeholder="Ex: 2 anos" required></div>
+                        <div class="form-group"><label>🏷️ Raça</label><input type="text" id="breed" placeholder="SRD, Labrador..."></div>
+                    </div>
+                    <div class="form-group"><label>💬 Observações</label><textarea id="notes" rows="3" placeholder="Alergias, medos, etc."></textarea></div>
+                    <button type="submit" class="btn-primary">💚 Enviar Solicitação</button>
+                </form>
+            `;
+            
+            const otherRadio = document.getElementById('typeOther');
+            const otherField = document.getElementById('otherPetField');
+            document.querySelectorAll('input[name="petType"]').forEach(r => {
+                r.addEventListener('change', () => otherField.classList.toggle('hidden', !otherRadio?.checked));
+            });
+            
+            document.getElementById('petSitterForm').onsubmit = (e) => {
+                e.preventDefault();
+                let petType = document.querySelector('input[name="petType"]:checked')?.value || 'Gato';
+                if (petType === 'Outro') petType = document.getElementById('otherPetSpecify')?.value || 'Outro animal';
+                const petSize = document.querySelector('input[name="petSize"]:checked')?.value || 'Não informado';
+                
+                const requestData = {
+                    ownerName: document.getElementById('ownerName').value,
+                    address: document.getElementById('address').value,
+                    phone: document.getElementById('phone').value,
+                    email: document.getElementById('email').value,
+                    petName: document.getElementById('petName').value,
+                    petType: petType,
+                    petSize: petSize,
+                    age: document.getElementById('age').value,
+                    breed: document.getElementById('breed').value || 'Não informado',
+                    notes: document.getElementById('notes').value || 'Nenhuma'
+                };
+                
+                this.app.addRequest(requestData);
+                alert('✅ Solicitação enviada! O administrador foi notificado via WhatsApp.');
+                document.getElementById('petFormModal').classList.remove('active');
+                if (this.app.currentUser.role === 'admin') this.renderAllRequests();
+                else this.renderUserRequests();
+            };
+        }
+
+        showPetFormModal() {
+            this.loadPetForm();
+            document.getElementById('petFormModal').classList.add('active');
+        }
+
+        toggleUserRequests() {
+            const section = document.getElementById('userRequestsSection');
+            section.classList.toggle('hidden');
+            if (!section.classList.contains('hidden')) this.renderUserRequests();
+        }
+
+        initEventListeners() {
+            // Login
+            document.getElementById('loginForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('loginUsername').value;
+                const password = document.getElementById('loginPassword').value;
+                if (this.app.login(username, password)) {
+                    if (this.app.currentUser.role === 'admin') this.showAdminScreen();
+                    else this.showUserScreen();
                 } else {
-                    html += `<div class="question-item"><label>${q.text}</label><div class="radio-group">
-                        <label><input type="radio" name="${q.field}" value="Sim"> ✅ Sim</label>
-                        <label><input type="radio" name="${q.field}" value="Não"> ❌ Não</label>
-                        <label><input type="radio" name="${q.field}" value="Não sei" checked> 🤔 Não sei</label>
-                    </div></div>`;
+                    this.showMessage('error', 'Usuário ou senha inválidos!', 'loginScreen');
                 }
             });
-            html += `<div class="question-item"><label>🍽️ Alimentação habitual</label><input type="text" id="alimentacao_extra" placeholder="Ex: ração premium, sachê 1x dia"></div>`;
-            container.innerHTML = html;
+            
+            // Registro
+            document.getElementById('registerForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('regUsername').value;
+                const password = document.getElementById('regPassword').value;
+                const confirm = document.getElementById('regConfirmPassword').value;
+                if (password !== confirm) { this.showMessage('error', 'Senhas não conferem!', 'registerScreen'); return; }
+                if (this.app.register(username, password)) {
+                    this.showMessage('success', 'Conta criada! Faça login.', 'registerScreen');
+                    setTimeout(() => this.showLoginScreen(), 1500);
+                } else {
+                    this.showMessage('error', 'Usuário já existe!', 'registerScreen');
+                }
+            });
+            
+            // Reset Password
+            document.getElementById('resetPasswordForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('resetUsername').value;
+                const newPassword = document.getElementById('resetNewPassword').value;
+                const confirm = document.getElementById('resetConfirmPassword').value;
+                if (newPassword !== confirm) { this.showMessage('error', 'Senhas não conferem!', 'resetPasswordScreen'); return; }
+                if (this.app.resetPassword(username, newPassword)) {
+                    this.showMessage('success', 'Senha redefinida!', 'resetPasswordScreen');
+                    setTimeout(() => this.showLoginScreen(), 1500);
+                } else {
+                    this.showMessage('error', 'Usuário não encontrado!', 'resetPasswordScreen');
+                }
+            });
+            
+            // Admin create user
+            document.getElementById('adminCreateUserForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('adminNewUsername').value;
+                const password = document.getElementById('adminNewPassword').value;
+                const role = document.getElementById('adminNewRole').value;
+                if (this.app.createUser(username, password, role)) {
+                    this.showMessage('success', `Usuário ${username} criado!`, 'adminScreen');
+                    this.renderUsersTable();
+                    document.getElementById('createUserModal').classList.remove('active');
+                } else {
+                    this.showMessage('error', 'Usuário já existe!', 'adminScreen');
+                }
+            });
+            
+            // Navigation
+            document.getElementById('showRegisterBtn').onclick = () => this.showRegisterScreen();
+            document.getElementById('showResetPasswordBtn').onclick = () => this.showResetScreen();
+            document.getElementById('backToLoginFromReg').onclick = () => this.showLoginScreen();
+            document.getElementById('backToLoginFromReset').onclick = () => this.showLoginScreen();
+            document.getElementById('logoutBtn').onclick = () => this.logout();
+            document.getElementById('logoutBtnUser').onclick = () => this.logout();
+            document.getElementById('showFormularioPetBtnAdmin').onclick = () => this.showPetFormModal();
+            document.getElementById('showFormularioPetBtnUser').onclick = () => this.showPetFormModal();
+            document.getElementById('showCreateUserModalBtn').onclick = () => document.getElementById('createUserModal').classList.add('active');
+            document.getElementById('closeCreateUserModal').onclick = () => document.getElementById('createUserModal').classList.remove('active');
+            document.getElementById('closePetFormModal').onclick = () => document.getElementById('petFormModal').classList.remove('active');
+            document.getElementById('closeEditModal').onclick = () => document.getElementById('editRequestModal').classList.remove('active');
+            document.getElementById('cardNewRequest').onclick = () => this.showPetFormModal();
+            document.getElementById('cardMyRequests').onclick = () => this.toggleUserRequests();
+            
+            window.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('active'); };
         }
-        
-        function updateQuestions() {
-            if(document.getElementById('typeCat')?.checked) renderQuestions('gato');
-            else if(document.getElementById('typeDog')?.checked) renderQuestions('cachorro');
-            else if(document.getElementById('typeBoth')?.checked) renderQuestions('ambos');
-            else if(document.getElementById('typeOther')?.checked) renderQuestions('outro');
+
+        showRegisterScreen() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('registerScreen').classList.remove('hidden');
         }
-        
-        document.getElementById('typeCat')?.addEventListener('change', updateQuestions);
-        document.getElementById('typeDog')?.addEventListener('change', updateQuestions);
-        document.getElementById('typeBoth')?.addEventListener('change', updateQuestions);
-        document.getElementById('typeOther')?.addEventListener('change', updateQuestions);
-        updateQuestions();
-        
-        document.getElementById('petSitterForm')?.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const ownerName = document.getElementById('ownerName')?.value.trim();
-            if(!ownerName) { alert('Por favor, preencha seu nome'); return; }
-            
-            let petType = "Gato";
-            if(document.getElementById('typeDog')?.checked) petType = "Cachorro";
-            else if(document.getElementById('typeBoth')?.checked) petType = "Ambos";
-            else if(document.getElementById('typeOther')?.checked) {
-                const other = document.getElementById('otherPetSpecify')?.value.trim();
-                petType = other ? `Outro: ${other}` : "Outro animal";
-            }
-            
-            let petSize = "Não informado";
-            document.querySelectorAll('input[name="petSize"]').forEach(r => { if(r.checked) petSize = r.value; });
-            
-            const requestData = {
-                ownerName: ownerName,
-                address: document.getElementById('address')?.value.trim() || 'Não informado',
-                phone: document.getElementById('phone')?.value.trim() || 'Não informado',
-                email: document.getElementById('email')?.value.trim() || 'Não informado',
-                petCount: document.getElementById('petCount')?.value || '1',
-                petName: document.getElementById('petName')?.value.trim() || 'Não informado',
-                petType: petType,
-                petSize: petSize,
-                age: document.getElementById('age')?.value.trim() || 'Não informado',
-                breed: document.getElementById('breed')?.value.trim() || 'Não informado',
-                notes: document.getElementById('notes')?.value.trim() || 'Nenhuma'
-            };
-            
-            if (isUserView && currentUser) {
-                addUserRequest(requestData);
-                alert('✅ Solicitação enviada com sucesso! Aguarde o contato do Pet Sitter.');
-                document.getElementById('petFormModal').classList.remove('active');
-                renderUserRequests();
-                document.getElementById('userRequestsSection')?.classList.remove('hidden');
-            } else {
-                const message = `🐾 *PET SITTER - NOVO CADASTRO* 🐾%0A%0A` +
-                    `👤 *Responsável:* ${ownerName}%0A` +
-                    `📍 *Endereço:* ${requestData.address}%0A` +
-                    `📱 *Telefone:* ${requestData.phone}%0A` +
-                    `📧 *E-mail:* ${requestData.email}%0A` +
-                    `🐾 *Pets:* ${requestData.petCount}%0A` +
-                    `🐕 *Nomes:* ${requestData.petName}%0A` +
-                    `🐾 *Tipo:* ${petType}%0A` +
-                    `📏 *Porte:* ${petSize}%0A` +
-                    `📅 *Idade:* ${requestData.age}%0A` +
-                    `🏷️ *Raça:* ${requestData.breed}%0A` +
-                    `💬 *Observações:* ${requestData.notes}%0A%0A` +
-                    `🌿 *Enviado via Pet Sitter System*`;
-                
-                window.open(`https://wa.me/5511984897049?text=${message}`, '_blank');
-                document.getElementById('petFormModal').classList.remove('active');
-            }
-        });
-    }
-    
-    function showPetFormModal(isUserView = true) {
-        loadPetSitterForm(isUserView);
-        document.getElementById('petFormModal').classList.add('active');
-    }
-    
-    function toggleUserRequests() {
-        const section = document.getElementById('userRequestsSection');
-        if (section.classList.contains('hidden')) {
-            renderUserRequests();
-            section.classList.remove('hidden');
-        } else {
-            section.classList.add('hidden');
+
+        showResetScreen() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('resetPasswordScreen').classList.remove('hidden');
+        }
+
+        logout() {
+            this.app.logout();
+            this.showLoginScreen();
         }
     }
 
-    // Event listeners
-    document.addEventListener('DOMContentLoaded', () => {
-        initUsers();
-        
-        const storedUser = localStorage.getItem('currentUser');
-        if (storedUser) {
-            currentUser = JSON.parse(storedUser);
-            if (currentUser) {
-                if (currentUser.role === 'admin') {
-                    showAdminScreen();
-                } else {
-                    showUserScreen();
-                }
-            } else {
-                showLoginScreen();
-            }
-        } else {
-            showLoginScreen();
-        }
-        
-        // Login
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-            if (login(username, password)) {
-                if (currentUser.role === 'admin') {
-                    showAdminScreen();
-                } else {
-                    showUserScreen();
-                }
-                document.getElementById('loginForm').reset();
-            } else {
-                showMessage('error', 'Usuário ou senha inválidos!', 'loginScreen');
-            }
-        });
-        
-        // Registro
-        document.getElementById('registerForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('regUsername').value;
-            const password = document.getElementById('regPassword').value;
-            const confirm = document.getElementById('regConfirmPassword').value;
-            if (password !== confirm) {
-                showMessage('error', 'As senhas não conferem!', 'registerScreen');
-                return;
-            }
-            if (password.length < 4) {
-                showMessage('error', 'A senha deve ter pelo menos 4 caracteres!', 'registerScreen');
-                return;
-            }
-            if (registerUser(username, password)) {
-                showMessage('success', 'Conta criada com sucesso! Faça login.', 'registerScreen');
-                setTimeout(() => showLoginScreen(), 1500);
-                document.getElementById('registerForm').reset();
-            } else {
-                showMessage('error', 'Nome de usuário já existe!', 'registerScreen');
-            }
-        });
-        
-        // Reset de senha
-        document.getElementById('resetPasswordForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('resetUsername').value;
-            const newPassword = document.getElementById('resetNewPassword').value;
-            const confirmPassword = document.getElementById('resetConfirmPassword').value;
-            if (newPassword !== confirmPassword) {
-                showMessage('error', 'As senhas não conferem!', 'resetPasswordScreen');
-                return;
-            }
-            if (newPassword.length < 4) {
-                showMessage('error', 'A senha deve ter pelo menos 4 caracteres!', 'resetPasswordScreen');
-                return;
-            }
-            if (resetPassword(username, newPassword)) {
-                showMessage('success', 'Senha redefinida com sucesso!', 'resetPasswordScreen');
-                setTimeout(() => showLoginScreen(), 1500);
-                document.getElementById('resetPasswordForm').reset();
-            } else {
-                showMessage('error', 'Usuário não encontrado!', 'resetPasswordScreen');
-            }
-        });
-        
-        // Admin criar usuário
-        document.getElementById('adminCreateUserForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('adminNewUsername').value;
-            const password = document.getElementById('adminNewPassword').value;
-            const role = document.getElementById('adminNewRole').value;
-            if (password.length < 4) {
-                showMessage('error', 'A senha deve ter pelo menos 4 caracteres!', 'adminScreen');
-                return;
-            }
-            if (adminCreateUser(username, password, role)) {
-                showMessage('success', `Usuário ${username} criado!`, 'adminScreen');
-                renderUsersTable();
-                document.getElementById('createUserModal').classList.remove('active');
-                document.getElementById('adminCreateUserForm').reset();
-            } else {
-                showMessage('error', 'Nome de usuário já existe!', 'adminScreen');
-            }
-        });
-        
-        // Navegação
-        document.getElementById('showRegisterBtn').addEventListener('click', showRegisterScreen);
-        document.getElementById('showResetPasswordBtn').addEventListener('click', showResetScreen);
-        document.getElementById('backToLoginFromReg').addEventListener('click', showLoginScreen);
-        document.getElementById('backToLoginFromReset').addEventListener('click', showLoginScreen);
-        document.getElementById('logoutBtn').addEventListener('click', logout);
-        document.getElementById('logoutBtnUser').addEventListener('click', logout);
-        
-        // Botões do Admin
-        document.getElementById('showFormularioPetBtnAdmin').addEventListener('click', () => showPetFormModal(false));
-        document.getElementById('showCreateUserModalBtn').addEventListener('click', () => {
-            document.getElementById('createUserModal').classList.add('active');
-        });
-        
-        // Botões do Usuário
-        document.getElementById('showFormularioPetBtnUser').addEventListener('click', () => showPetFormModal(true));
-        document.getElementById('showMyRequestsBtn').addEventListener('click', toggleUserRequests);
-        document.getElementById('cardNewRequest').addEventListener('click', () => showPetFormModal(true));
-        
-        // Fechar modais
-        document.getElementById('closeCreateUserModal').addEventListener('click', () => {
-            document.getElementById('createUserModal').classList.remove('active');
-        });
-        document.getElementById('confirmDeleteBtn').addEventListener('click', confirmDeleteUser);
-        document.getElementById('closeDeleteModal').addEventListener('click', () => {
-            document.getElementById('deleteUserModal').classList.remove('active');
-        });
-        document.getElementById('closePetFormModal').addEventListener('click', () => {
-            document.getElementById('petFormModal').classList.remove('active');
-        });
-        
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-overlay')) {
-                e.target.classList.remove('active');
-            }
-        });
-        
-        generateFloatingPaws();
-    });
+    // Inicialização
+    const app = new AppState();
+    const ui = new UIController(app);
     
-    function generateFloatingPaws() {
+    // Inicializar UI baseado no estado atual
+    if (app.currentUser) {
+        if (app.currentUser.role === 'admin') ui.showAdminScreen();
+        else ui.showUserScreen();
+    } else {
+        ui.showLoginScreen();
+    }
+    
+    // Gerar patinhas flutuantes
+    (function generateFloatingPaws() {
         const container = document.getElementById('floatingDecor');
-        if(!container) return;
-        const icons = ['🐾', '🐱', '🐕', '🦴', '🐈‍⬛', '🍃', '💚', '🌟'];
-        for(let i=0; i<20; i++) {
-            let paw = document.createElement('div');
+        if (!container) return;
+        const icons = ['🐾', '🐱', '🐕', '🦴', '🐈‍⬛', '🍃', '💚', '🌟', '🐶', '😺'];
+        for (let i = 0; i < 30; i++) {
+            const paw = document.createElement('div');
             paw.className = 'floating-paw';
             paw.innerText = icons[Math.floor(Math.random() * icons.length)];
-            paw.style.fontSize = (Math.random() * 38 + 20) + 'px';
-            paw.style.left = Math.random() * 95 + '%';
-            paw.style.top = Math.random() * 100 + '%';
-            paw.style.animationDuration = 18 + Math.random() * 35 + 's';
-            paw.style.animationDelay = Math.random() * 8 + 's';
-            paw.style.opacity = 0.04 + Math.random() * 0.1;
+            paw.style.fontSize = `${Math.random() * 40 + 20}px`;
+            paw.style.left = `${Math.random() * 100}%`;
+            paw.style.top = `${Math.random() * 100}%`;
+            paw.style.animationDuration = `${Math.random() * 30 + 15}s`;
+            paw.style.animationDelay = `${Math.random() * 10}s`;
+            paw.style.opacity = `${Math.random() * 0.08 + 0.03}`;
             container.appendChild(paw);
         }
-    }
+    })();
 </script>
 </body>
 </html>

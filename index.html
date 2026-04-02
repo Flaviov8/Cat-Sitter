@@ -585,6 +585,23 @@
         .loading {
             animation: pulse 1.5s ease-in-out infinite;
         }
+
+        /* Estilos para o grupo de medicação */
+        .medication-group {
+            background: #fefce8;
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            margin-top: 0.5rem;
+            border: 1px solid #fde047;
+        }
+
+        .medication-group .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .medication-group label {
+            color: #854d0e;
+        }
     </style>
 </head>
 <body>
@@ -837,6 +854,13 @@
         }
 
         sendToWhatsApp(request) {
+            let medicationText = '';
+            if (request.takesMedication === 'sim') {
+                medicationText = `💊 *Medicação:* SIM%0A📛 *Nome do Medicamento:* ${request.medicationName || 'Não informado'}%0A💉 *Dosagem:* ${request.medicationDosage || 'Não informada'}%0A`;
+            } else {
+                medicationText = `💊 *Medicação:* NÃO%0A`;
+            }
+
             const message = `🐾 *NOVO PEDIDO - PET SITTER* 🐾%0A%0A` +
                 `👤 *Cliente:* ${request.ownerName}%0A` +
                 `👤 *Usuário:* ${request.username}%0A` +
@@ -849,6 +873,7 @@
                 `📏 *Porte:* ${request.petSize || 'Não informado'}%0A` +
                 `📅 *Idade:* ${request.age || 'Não informado'}%0A` +
                 `🏷️ *Raça:* ${request.breed || 'Não informado'}%0A` +
+                `${medicationText}` +
                 `💬 *Observações:* ${request.notes || 'Nenhuma'}%0A%0A` +
                 `📅 *Data:* ${new Date(request.createdAt).toLocaleString('pt-BR')}%0A` +
                 `🔄 *Status:* ${request.status}%0A%0A` +
@@ -967,7 +992,15 @@
                 const viewBtn = document.createElement('button');
                 viewBtn.textContent = '👁️ Ver';
                 viewBtn.className = 'btn-secondary';
-                viewBtn.onclick = () => alert(`📋 DETALHES\n\nCliente: ${req.ownerName}\nTelefone: ${req.phone}\nPet(s): ${req.petName}\nTipo: ${req.petType}\nPorte: ${req.petSize}\nIdade: ${req.age}\nObservações: ${req.notes || 'Nenhuma'}`);
+                viewBtn.onclick = () => {
+                    let medicationInfo = '';
+                    if (req.takesMedication === 'sim') {
+                        medicationInfo = `\n💊 Medicação: SIM\n📛 Medicamento: ${req.medicationName || 'Não informado'}\n💉 Dosagem: ${req.medicationDosage || 'Não informada'}`;
+                    } else if (req.takesMedication === 'nao') {
+                        medicationInfo = `\n💊 Medicação: NÃO`;
+                    }
+                    alert(`📋 DETALHES\n\nCliente: ${req.ownerName}\nTelefone: ${req.phone}\nPet(s): ${req.petName}\nTipo: ${req.petType}\nPorte: ${req.petSize}\nIdade: ${req.age}\n${medicationInfo}\nObservações: ${req.notes || 'Nenhuma'}`);
+                };
                 actionsCell.appendChild(viewBtn);
             });
         }
@@ -998,13 +1031,24 @@
                 const viewBtn = document.createElement('button');
                 viewBtn.textContent = '👁️ Ver';
                 viewBtn.className = 'btn-secondary';
-                viewBtn.onclick = () => alert(`📋 DETALHES\n\nPet(s): ${req.petName}\nTipo: ${req.petType}\nPorte: ${req.petSize}\nIdade: ${req.age}\nRaça: ${req.breed}\nObservações: ${req.notes || 'Nenhuma'}`);
+                viewBtn.onclick = () => {
+                    let medicationInfo = '';
+                    if (req.takesMedication === 'sim') {
+                        medicationInfo = `\n💊 Medicação: SIM\n📛 Medicamento: ${req.medicationName || 'Não informado'}\n💉 Dosagem: ${req.medicationDosage || 'Não informada'}`;
+                    } else if (req.takesMedication === 'nao') {
+                        medicationInfo = `\n💊 Medicação: NÃO`;
+                    }
+                    alert(`📋 DETALHES\n\nPet(s): ${req.petName}\nTipo: ${req.petType}\nPorte: ${req.petSize}\nIdade: ${req.age}\nRaça: ${req.breed}\n${medicationInfo}\nObservações: ${req.notes || 'Nenhuma'}`);
+                };
                 actionsCell.appendChild(viewBtn);
             });
         }
 
         showEditModal(request) {
             const container = document.getElementById('editFormContent');
+            const takesMedicationChecked = request.takesMedication === 'sim' ? 'sim' : (request.takesMedication === 'nao' ? 'nao' : '');
+            const showMedicationFields = takesMedicationChecked === 'sim';
+            
             container.innerHTML = `
                 <form id="editRequestForm">
                     <div class="form-group"><label>🐕 Nome do(s) pet(s)</label><input type="text" id="editPetName" value="${request.petName || ''}" required></div>
@@ -1012,21 +1056,57 @@
                     <div class="form-group"><label>📏 Porte</label><input type="text" id="editPetSize" value="${request.petSize || ''}"></div>
                     <div class="form-group"><label>📅 Idade</label><input type="text" id="editAge" value="${request.age || ''}"></div>
                     <div class="form-group"><label>🏷️ Raça</label><input type="text" id="editBreed" value="${request.breed || ''}"></div>
+                    
+                    <div class="form-group">
+                        <label>💊 O pet toma alguma medicação?</label>
+                        <div class="grid-2cols">
+                            <div><input type="radio" name="editTakesMedication" id="editMedYes" value="sim" ${takesMedicationChecked === 'sim' ? 'checked' : ''}> <label for="editMedYes">✅ Sim</label></div>
+                            <div><input type="radio" name="editTakesMedication" id="editMedNo" value="nao" ${takesMedicationChecked === 'nao' ? 'checked' : ''}> <label for="editMedNo">❌ Não</label></div>
+                        </div>
+                    </div>
+                    
+                    <div id="editMedicationFields" class="medication-group" style="display: ${showMedicationFields ? 'block' : 'none'}">
+                        <div class="form-group"><label>📛 Nome do medicamento</label><input type="text" id="editMedicationName" value="${request.medicationName || ''}" placeholder="Ex: Antibiótico, Aines, etc."></div>
+                        <div class="form-group"><label>💉 Dosagem</label><input type="text" id="editMedicationDosage" value="${request.medicationDosage || ''}" placeholder="Ex: 1 comprimido a cada 12h, 2ml, etc."></div>
+                    </div>
+                    
                     <div class="form-group"><label>💬 Observações</label><textarea id="editNotes" rows="3">${request.notes || ''}</textarea></div>
                     <button type="submit" class="btn-primary">💾 Salvar Alterações</button>
                 </form>
             `;
             
+            // Adicionar eventos para mostrar/esconder campos de medicação
+            const medYes = document.getElementById('editMedYes');
+            const medNo = document.getElementById('editMedNo');
+            const medFields = document.getElementById('editMedicationFields');
+            
+            if (medYes && medNo && medFields) {
+                medYes.addEventListener('change', () => { medFields.style.display = 'block'; });
+                medNo.addEventListener('change', () => { medFields.style.display = 'none'; });
+            }
+            
             document.getElementById('editRequestForm').onsubmit = (e) => {
                 e.preventDefault();
-                this.app.updateRequest(request.id, {
+                const takesMedication = document.querySelector('input[name="editTakesMedication"]:checked')?.value || '';
+                const updateData = {
                     petName: document.getElementById('editPetName').value,
                     petType: document.getElementById('editPetType').value,
                     petSize: document.getElementById('editPetSize').value,
                     age: document.getElementById('editAge').value,
                     breed: document.getElementById('editBreed').value,
-                    notes: document.getElementById('editNotes').value
-                });
+                    notes: document.getElementById('editNotes').value,
+                    takesMedication: takesMedication
+                };
+                
+                if (takesMedication === 'sim') {
+                    updateData.medicationName = document.getElementById('editMedicationName')?.value || '';
+                    updateData.medicationDosage = document.getElementById('editMedicationDosage')?.value || '';
+                } else {
+                    updateData.medicationName = '';
+                    updateData.medicationDosage = '';
+                }
+                
+                this.app.updateRequest(request.id, updateData);
                 document.getElementById('editRequestModal').classList.remove('active');
                 this.renderUserRequests();
                 this.renderAllRequests();
@@ -1065,10 +1145,34 @@
                         <div class="form-group"><label>📅 Idade</label><input type="text" id="age" placeholder="Ex: 2 anos" required></div>
                         <div class="form-group"><label>🏷️ Raça</label><input type="text" id="breed" placeholder="SRD, Labrador..."></div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label>💊 O pet toma alguma medicação?</label>
+                        <div class="grid-2cols">
+                            <div><input type="radio" name="takesMedication" id="medYes" value="sim"> <label for="medYes">✅ Sim</label></div>
+                            <div><input type="radio" name="takesMedication" id="medNo" value="nao" checked> <label for="medNo">❌ Não</label></div>
+                        </div>
+                    </div>
+                    
+                    <div id="medicationFields" class="medication-group" style="display: none;">
+                        <div class="form-group"><label>📛 Nome do medicamento</label><input type="text" id="medicationName" placeholder="Ex: Antibiótico, Aines, etc."></div>
+                        <div class="form-group"><label>💉 Dosagem</label><input type="text" id="medicationDosage" placeholder="Ex: 1 comprimido a cada 12h, 2ml, etc."></div>
+                    </div>
+                    
                     <div class="form-group"><label>💬 Observações</label><textarea id="notes" rows="3" placeholder="Alergias, medos, etc."></textarea></div>
                     <button type="submit" class="btn-primary">💚 Enviar Solicitação</button>
                 </form>
             `;
+            
+            // Configurar eventos para mostrar/esconder campos de medicação
+            const medYes = document.getElementById('medYes');
+            const medNo = document.getElementById('medNo');
+            const medFields = document.getElementById('medicationFields');
+            
+            if (medYes && medNo && medFields) {
+                medYes.addEventListener('change', () => { medFields.style.display = 'block'; });
+                medNo.addEventListener('change', () => { medFields.style.display = 'none'; });
+            }
             
             const otherRadio = document.getElementById('typeOther');
             const otherField = document.getElementById('otherPetField');
@@ -1081,6 +1185,7 @@
                 let petType = document.querySelector('input[name="petType"]:checked')?.value || 'Gato';
                 if (petType === 'Outro') petType = document.getElementById('otherPetSpecify')?.value || 'Outro animal';
                 const petSize = document.querySelector('input[name="petSize"]:checked')?.value || 'Não informado';
+                const takesMedication = document.querySelector('input[name="takesMedication"]:checked')?.value || 'nao';
                 
                 const requestData = {
                     ownerName: document.getElementById('ownerName').value,
@@ -1092,8 +1197,17 @@
                     petSize: petSize,
                     age: document.getElementById('age').value,
                     breed: document.getElementById('breed').value || 'Não informado',
-                    notes: document.getElementById('notes').value || 'Nenhuma'
+                    notes: document.getElementById('notes').value || 'Nenhuma',
+                    takesMedication: takesMedication
                 };
+                
+                if (takesMedication === 'sim') {
+                    requestData.medicationName = document.getElementById('medicationName').value || 'Não informado';
+                    requestData.medicationDosage = document.getElementById('medicationDosage').value || 'Não informada';
+                } else {
+                    requestData.medicationName = '';
+                    requestData.medicationDosage = '';
+                }
                 
                 this.app.addRequest(requestData);
                 alert('✅ Solicitação enviada! O administrador foi notificado via WhatsApp.');

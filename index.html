@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>🐾 Pet Sitter | Sistema Moderno de Gestão</title>
+    <!-- Flatpickr CSS para calendário -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         /* CSS Moderno com Variáveis e Reset */
         :root {
@@ -57,11 +59,11 @@
 
         body {
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: clamp(1rem, 5vw, 2.5rem);
             position: relative;
-            overflow-x: hidden;
+            overflow-x: auto;
             color: var(--gray-800);
         }
 
@@ -73,8 +75,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.05) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
             animation: gradientShift 15s ease infinite;
@@ -85,35 +87,30 @@
             50% { opacity: 1; transform: scale(1.1); }
         }
 
-        /* Patinhas flutuantes com animação 3D */
+        /* Patinhas flutuantes */
         .floating-paw {
             position: fixed;
             font-size: clamp(1.5rem, 4vw, 3rem);
-            opacity: 0.06;
+            opacity: 0.08;
             pointer-events: none;
             z-index: 0;
             animation: float3D 20s infinite alternate ease-in-out;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.02));
             will-change: transform;
         }
 
         @keyframes float3D {
-            0% {
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-            100% {
-                transform: translate(50px, -30px) rotate(15deg) scale(1.2);
-            }
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            100% { transform: translate(50px, -30px) rotate(15deg) scale(1.2); }
         }
 
-        /* Container principal com Glassmorphism 2.0 */
+        /* Containers principais */
         .login-container, .admin-container, .user-container {
             max-width: 500px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-2xl), 0 0 0 1px rgba(34, 197, 94, 0.1);
+            box-shadow: var(--shadow-2xl);
             overflow: hidden;
             position: relative;
             z-index: 2;
@@ -135,7 +132,7 @@
             }
         }
 
-        /* Hero section moderna */
+        /* Hero section */
         .hero {
             background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-600) 50%, var(--primary-500) 100%);
             padding: 2rem;
@@ -152,7 +149,7 @@
             right: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
             animation: rotateGlow 20s linear infinite;
         }
 
@@ -164,7 +161,6 @@
         .hero h1 {
             font-size: clamp(1.8rem, 6vw, 2.5rem);
             font-weight: 800;
-            letter-spacing: -0.02em;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -178,20 +174,73 @@
             font-size: 1rem;
             opacity: 0.95;
             margin-top: 12px;
-            font-weight: 500;
             position: relative;
             z-index: 1;
         }
 
-        /* Formulários modernos */
+        /* Formulários */
         form {
             padding: clamp(1.5rem, 5vw, 2.5rem);
         }
 
         .form-group {
             margin-bottom: 1.5rem;
-            animation: fadeInUp 0.5s ease-out backwards;
-            animation-delay: calc(var(--order, 0) * 0.05s);
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--primary-700);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            border: 2px solid var(--gray-200);
+            background: white;
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-base);
+            outline: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Lista de pets dinâmica */
+        .pets-list {
+            background: #f0fdf4;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 2px dashed var(--primary-300);
+        }
+
+        .pets-list h4 {
+            color: var(--primary-700);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+        }
+
+        .pet-item {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-200);
+            position: relative;
+            animation: fadeInUp 0.3s ease-out;
         }
 
         @keyframes fadeInUp {
@@ -205,38 +254,53 @@
             }
         }
 
-        label {
+        .pet-item .remove-pet {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--danger);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 600;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+
+        .pet-item .remove-pet:hover {
+            transform: scale(1.1);
+            background: #dc2626;
+        }
+
+        .pet-item .grid-2cols {
+            margin-top: 0.5rem;
+        }
+
+        .btn-add-pet {
+            background: var(--primary-100);
             color: var(--primary-700);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            letter-spacing: -0.01em;
-        }
-
-        input, select, textarea {
+            border: 2px dashed var(--primary-400);
+            padding: 0.8rem;
             width: 100%;
-            padding: 0.9rem 1.2rem;
-            font-family: inherit;
-            font-size: 1rem;
-            border: 2px solid var(--gray-200);
-            background: white;
-            border-radius: var(--radius-lg);
-            transition: all var(--transition-base);
-            outline: none;
-            color: var(--gray-800);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+            margin-top: 0.5rem;
         }
 
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--primary-500);
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
+        .btn-add-pet:hover {
+            background: var(--primary-200);
             transform: translateY(-2px);
         }
 
-        /* Botões modernos com efeito hover 3D */
-        .btn-primary, .btn-secondary, .btn-danger, .btn-warning {
+        /* Botões */
+        .btn-primary, .btn-secondary, .btn-danger {
             border: none;
             padding: 1rem;
             font-size: 1rem;
@@ -248,8 +312,6 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            position: relative;
-            overflow: hidden;
         }
 
         .btn-primary {
@@ -263,10 +325,6 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
         .btn-secondary {
             background: var(--gray-100);
             color: var(--primary-700);
@@ -278,17 +336,6 @@
             transform: translateY(-2px);
         }
 
-        .btn-danger {
-            background: linear-gradient(135deg, var(--danger), #dc2626);
-            color: white;
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, var(--warning), #ea580c);
-            color: white;
-        }
-
-        /* Links modernos */
         .links {
             display: flex;
             justify-content: space-between;
@@ -305,7 +352,6 @@
             font-size: 0.9rem;
             font-weight: 500;
             transition: all var(--transition-fast);
-            padding: 0.5rem;
         }
 
         .links button:hover {
@@ -313,15 +359,14 @@
             transform: translateX(4px);
         }
 
-        /* Mensagens com animação */
+        /* Mensagens */
         .error-message, .success-message {
-            padding: 1rem 1.2rem;
+            padding: 1rem;
             border-radius: var(--radius-lg);
             font-size: 0.875rem;
             margin-bottom: 1rem;
             font-weight: 500;
-            animation: slideInRight 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            backdrop-filter: blur(8px);
+            animation: slideInRight 0.3s ease-out;
         }
 
         .error-message {
@@ -347,14 +392,14 @@
             }
         }
 
-        /* Modal moderno */
+        /* Modais */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
@@ -380,14 +425,13 @@
             padding: 2rem;
             transform: scale(0.95);
             transition: transform var(--transition-base);
-            box-shadow: var(--shadow-2xl);
         }
 
         .active .modal-card {
             transform: scale(1);
         }
 
-        /* Tabelas modernas */
+        /* Tabelas */
         .users-table {
             width: 100%;
             overflow-x: auto;
@@ -413,16 +457,13 @@
             color: var(--primary-700);
             font-weight: 600;
             font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
         tr:hover {
             background: var(--gray-50);
-            transition: background var(--transition-fast);
         }
 
-        /* Cards modernos */
+        /* Cards */
         .dashboard-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -437,7 +478,6 @@
             transition: all var(--transition-base);
             cursor: pointer;
             border: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
         }
 
         .info-card:hover {
@@ -451,13 +491,7 @@
             margin-bottom: 1rem;
         }
 
-        .info-card h3 {
-            color: var(--primary-700);
-            margin-bottom: 0.5rem;
-            font-size: 1.25rem;
-        }
-
-        /* Badges de status */
+        /* Status badges */
         .status-badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -494,7 +528,7 @@
             color: white;
         }
 
-        /* Ações em tabela */
+        /* Ações */
         .action-buttons {
             display: flex;
             gap: 0.5rem;
@@ -507,7 +541,7 @@
             border-radius: var(--radius-md);
         }
 
-        /* Layout responsivo avançado */
+        /* Grids */
         .grid-2cols {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -533,33 +567,8 @@
                 padding: 0.75rem;
                 font-size: 0.875rem;
             }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
         }
 
-        /* Scrollbar moderna */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--gray-100);
-            border-radius: var(--radius-full);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-400);
-            border-radius: var(--radius-full);
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-500);
-        }
-
-        /* Classes utilitárias */
         .hidden {
             display: none;
         }
@@ -568,39 +577,20 @@
             text-align: center;
         }
 
-        .mt-4 {
-            margin-top: 1rem;
+        /* Grupos de informações */
+        .date-range-group {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .mb-4 {
-            margin-bottom: 1rem;
-        }
-
-        /* Animações de loading */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .loading {
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        /* Estilos para o grupo de medicação */
         .medication-group {
             background: #fefce8;
             border-radius: var(--radius-lg);
             padding: 1rem;
             margin-top: 0.5rem;
             border: 1px solid #fde047;
-        }
-
-        .medication-group .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .medication-group label {
-            color: #854d0e;
         }
     </style>
 </head>
@@ -611,22 +601,12 @@
 <!-- Tela de Login -->
 <div id="loginScreen" class="login-container">
     <div class="hero">
-        <h1>
-            <span>🐾</span>
-            Pet Sitter
-            <span>🐾</span>
-        </h1>
+        <h1><span>🐾</span> Pet Sitter <span>🐾</span></h1>
         <p>💚 Cuidado premium com tecnologia de ponta 💚</p>
     </div>
     <form id="loginForm">
-        <div class="form-group" style="--order: 1">
-            <label>👤 Nome de usuário</label>
-            <input type="text" id="loginUsername" placeholder="Digite seu nome de usuário" required autocomplete="username">
-        </div>
-        <div class="form-group" style="--order: 2">
-            <label>🔐 Senha</label>
-            <input type="password" id="loginPassword" placeholder="Digite sua senha" required autocomplete="current-password">
-        </div>
+        <div class="form-group"><label>👤 Nome de usuário</label><input type="text" id="loginUsername" placeholder="Digite seu nome de usuário" required></div>
+        <div class="form-group"><label>🔐 Senha</label><input type="password" id="loginPassword" placeholder="Digite sua senha" required></div>
         <button type="submit" class="btn-primary">🔓 Entrar no Sistema</button>
         <div class="links">
             <button type="button" id="showResetPasswordBtn">🔑 Esqueci minha senha</button>
@@ -637,10 +617,7 @@
 
 <!-- Tela de Registro -->
 <div id="registerScreen" class="login-container hidden">
-    <div class="hero">
-        <h1>📝 Criar Nova Conta</h1>
-        <p>🐱 Junte-se à nossa família Pet Sitter</p>
-    </div>
+    <div class="hero"><h1>📝 Criar Nova Conta</h1><p>🐱 Junte-se à nossa família Pet Sitter</p></div>
     <form id="registerForm">
         <div class="form-group"><label>👤 Nome de usuário</label><input type="text" id="regUsername" required></div>
         <div class="form-group"><label>🔐 Senha</label><input type="password" id="regPassword" required></div>
@@ -675,17 +652,14 @@
         <div class="users-table">
             <h3 style="color: var(--primary-700); margin-bottom: 1rem;">📋 Todos os Pedidos</h3>
             <table id="allRequestsTable">
-                <thead><tr><th>Data</th><th>Cliente</th><th>Pet(s)</th><th>Telefone</th><th>Status</th><th>Ações</th></tr></thead>
+                <thead><tr><th>Data</th><th>Período</th><th>Cliente</th><th>Pets</th><th>Status</th><th>Ações</th></tr></thead>
                 <tbody id="allRequestsBody"></tbody>
             </table>
         </div>
         
         <div class="users-table" style="margin-top: 2rem;">
             <h3 style="color: var(--primary-700); margin-bottom: 1rem;">👥 Usuários Cadastrados</h3>
-            <table id="usersTable">
-                <thead><tr><th>Usuário</th><th>Tipo</th><th>Ações</th></tr></thead>
-                <tbody id="usersTableBody"></tbody>
-            </table>
+            <table id="usersTable"><thead><tr><th>Usuário</th><th>Tipo</th><th>Ações</th></tr></thead><tbody id="usersTableBody"></tbody></table>
         </div>
     </div>
 </div>
@@ -698,24 +672,13 @@
         <button id="showFormularioPetBtnUser" class="btn-primary" style="width: 100%; margin-bottom: 2rem;">🐕 Novo Pedido</button>
         
         <div class="dashboard-cards">
-            <div class="info-card" id="cardNewRequest">
-                <div class="card-icon">🐾</div>
-                <h3>Novo Pedido</h3>
-                <p>Agende um novo serviço para seu pet</p>
-            </div>
-            <div class="info-card" id="cardMyRequests">
-                <div class="card-icon">📋</div>
-                <h3>Meus Pedidos</h3>
-                <p>Visualize e edite seus pedidos</p>
-            </div>
+            <div class="info-card" id="cardNewRequest"><div class="card-icon">🐾</div><h3>Novo Pedido</h3><p>Agende um novo serviço</p></div>
+            <div class="info-card" id="cardMyRequests"><div class="card-icon">📋</div><h3>Meus Pedidos</h3><p>Visualize e edite seus pedidos</p></div>
         </div>
         
         <div id="userRequestsSection" class="users-table hidden" style="margin-top: 2rem;">
             <h3 style="color: var(--primary-700); margin-bottom: 1rem;">📋 Meus Pedidos</h3>
-            <table id="userRequestsTable">
-                <thead><tr><th>Data</th><th>Pet(s)</th><th>Status</th><th>Ações</th></tr></thead>
-                <tbody id="userRequestsBody"></tbody>
-            </table>
+            <table id="userRequestsTable"><thead><tr><th>Data</th><th>Período</th><th>Pets</th><th>Status</th><th>Ações</th></tr></thead><tbody id="userRequestsBody"></tbody></table>
         </div>
     </div>
 </div>
@@ -744,17 +707,12 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 <script>
-    // Modern JavaScript com ES2024 features
-    const STORAGE_KEYS = {
-        USERS: 'petSitterUsers',
-        REQUESTS: 'petSitterRequests',
-        CURRENT_USER: 'currentUser'
-    };
-
+    const STORAGE_KEYS = { USERS: 'petSitterUsers', REQUESTS: 'petSitterRequests', CURRENT_USER: 'currentUser' };
     const WHATSAPP_NUMBER = "5511984897049";
 
-    // Classe para gerenciamento de estado
     class AppState {
         constructor() {
             this.currentUser = null;
@@ -785,18 +743,11 @@
 
         login(username, password) {
             const user = this.users.find(u => u.username === username && u.password === password);
-            if (user) {
-                this.currentUser = user;
-                this.saveCurrentUser();
-                return true;
-            }
+            if (user) { this.currentUser = user; this.saveCurrentUser(); return true; }
             return false;
         }
 
-        logout() {
-            this.currentUser = null;
-            localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
-        }
+        logout() { this.currentUser = null; localStorage.removeItem(STORAGE_KEYS.CURRENT_USER); }
 
         register(username, password) {
             if (this.users.find(u => u.username === username)) return false;
@@ -854,44 +805,42 @@
         }
 
         sendToWhatsApp(request) {
-            let medicationText = '';
-            if (request.takesMedication === 'sim') {
-                medicationText = `💊 *Medicação:* SIM%0A📛 *Nome do Medicamento:* ${request.medicationName || 'Não informado'}%0A💉 *Dosagem:* ${request.medicationDosage || 'Não informada'}%0A`;
+            let petsText = '';
+            if (request.pets && request.pets.length > 0) {
+                request.pets.forEach((pet, idx) => {
+                    petsText += `🐕 Pet ${idx + 1}: ${pet.name} (${pet.age})%0A`;
+                });
             } else {
-                medicationText = `💊 *Medicação:* NÃO%0A`;
+                petsText = `🐕 Nome: ${request.petName || 'Não informado'}%0A📅 Idade: ${request.age || 'Não informado'}%0A`;
             }
+
+            let medicationText = request.takesMedication === 'sim' ? 
+                `💊 Medicação: SIM%0A📛 Medicamento: ${request.medicationName || 'Não informado'}%0A💉 Dosagem: ${request.medicationDosage || 'Não informada'}%0A` : 
+                `💊 Medicação: NÃO%0A`;
 
             const message = `🐾 *NOVO PEDIDO - PET SITTER* 🐾%0A%0A` +
                 `👤 *Cliente:* ${request.ownerName}%0A` +
-                `👤 *Usuário:* ${request.username}%0A` +
                 `📍 *Endereço:* ${request.address || 'Não informado'}%0A` +
                 `📱 *Telefone:* ${request.phone || 'Não informado'}%0A` +
                 `📧 *E-mail:* ${request.email || 'Não informado'}%0A` +
-                `🐾 *Quantidade:* ${request.petCount || '1'}%0A` +
-                `🐕 *Nome(s):* ${request.petName || 'Não informado'}%0A` +
+                `${petsText}` +
                 `🐾 *Tipo:* ${request.petType || 'Não informado'}%0A` +
                 `📏 *Porte:* ${request.petSize || 'Não informado'}%0A` +
-                `📅 *Idade:* ${request.age || 'Não informado'}%0A` +
                 `🏷️ *Raça:* ${request.breed || 'Não informado'}%0A` +
+                `📆 *Data Início:* ${request.startDate || 'Não informada'}%0A` +
+                `📆 *Data Término:* ${request.endDate || 'Não informada'}%0A` +
                 `${medicationText}` +
                 `💬 *Observações:* ${request.notes || 'Nenhuma'}%0A%0A` +
-                `📅 *Data:* ${new Date(request.createdAt).toLocaleString('pt-BR')}%0A` +
-                `🔄 *Status:* ${request.status}%0A%0A` +
-                `🌿 *Enviado pelo sistema Pet Sitter*`;
+                `📅 *Pedido em:* ${new Date(request.createdAt).toLocaleString('pt-BR')}%0A` +
+                `🔄 *Status:* ${request.status}`;
             
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
         }
 
-        getUserRequests(userId) {
-            return this.requests.filter(r => r.userId === userId).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        }
-
-        getAllRequests() {
-            return [...this.requests].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        }
+        getUserRequests(userId) { return this.requests.filter(r => r.userId === userId).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); }
+        getAllRequests() { return [...this.requests].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); }
     }
 
-    // UI Controller
     class UIController {
         constructor(app) {
             this.app = app;
@@ -919,7 +868,6 @@
         showAdminScreen() {
             document.getElementById('loginScreen').classList.add('hidden');
             document.getElementById('adminScreen').classList.remove('hidden');
-            document.getElementById('userScreen').classList.add('hidden');
             document.getElementById('welcomeUserAdmin').innerHTML = `Bem-vindo, ${this.app.currentUser.username} 👑`;
             this.renderUsersTable();
             this.renderAllRequests();
@@ -959,6 +907,16 @@
             });
         }
 
+        formatPetsList(pets) {
+            if (!pets || pets.length === 0) return 'Não informado';
+            return pets.map(p => `${p.name} (${p.age})`).join(', ');
+        }
+
+        formatDateRange(startDate, endDate) {
+            if (!startDate && !endDate) return 'Não definido';
+            return `${startDate || '?'} até ${endDate || '?'}`;
+        }
+
         renderAllRequests() {
             const tbody = document.getElementById('allRequestsBody');
             if (!tbody) return;
@@ -971,9 +929,9 @@
             allRequests.forEach(req => {
                 const row = tbody.insertRow();
                 row.insertCell(0).textContent = new Date(req.createdAt).toLocaleString('pt-BR');
-                row.insertCell(1).textContent = req.ownerName || req.username;
-                row.insertCell(2).textContent = req.petName || 'Não informado';
-                row.insertCell(3).textContent = req.phone || 'Não informado';
+                row.insertCell(1).textContent = this.formatDateRange(req.startDate, req.endDate);
+                row.insertCell(2).textContent = req.ownerName || req.username;
+                row.insertCell(3).textContent = this.formatPetsList(req.pets);
                 row.insertCell(4).innerHTML = `<span class="status-badge status-${req.status === 'Pendente' ? 'pendente' : 'aprovado'}">${req.status}</span>`;
                 const actionsCell = row.insertCell(5);
                 actionsCell.className = 'action-buttons';
@@ -993,13 +951,13 @@
                 viewBtn.textContent = '👁️ Ver';
                 viewBtn.className = 'btn-secondary';
                 viewBtn.onclick = () => {
-                    let medicationInfo = '';
-                    if (req.takesMedication === 'sim') {
-                        medicationInfo = `\n💊 Medicação: SIM\n📛 Medicamento: ${req.medicationName || 'Não informado'}\n💉 Dosagem: ${req.medicationDosage || 'Não informada'}`;
-                    } else if (req.takesMedication === 'nao') {
-                        medicationInfo = `\n💊 Medicação: NÃO`;
+                    let petsInfo = '';
+                    if (req.pets && req.pets.length > 0) {
+                        req.pets.forEach((p, i) => {
+                            petsInfo += `\n🐕 Pet ${i+1}: ${p.name}\n📅 Idade: ${p.age}`;
+                        });
                     }
-                    alert(`📋 DETALHES\n\nCliente: ${req.ownerName}\nTelefone: ${req.phone}\nPet(s): ${req.petName}\nTipo: ${req.petType}\nPorte: ${req.petSize}\nIdade: ${req.age}\n${medicationInfo}\nObservações: ${req.notes || 'Nenhuma'}`);
+                    alert(`📋 DETALHES\n\n👤 Cliente: ${req.ownerName}\n📱 Telefone: ${req.phone}\n📧 E-mail: ${req.email}\n📍 Endereço: ${req.address}\n${petsInfo}\n🐾 Tipo: ${req.petType}\n📏 Porte: ${req.petSize}\n📆 Período: ${this.formatDateRange(req.startDate, req.endDate)}\n💬 Observações: ${req.notes || 'Nenhuma'}`);
                 };
                 actionsCell.appendChild(viewBtn);
             });
@@ -1010,16 +968,17 @@
             if (!tbody) return;
             const userReqs = this.app.getUserRequests(this.app.currentUser.id);
             if (userReqs.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="text-center">Nenhum pedido encontrado</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center">Nenhum pedido encontrado</td></tr>';
                 return;
             }
             tbody.innerHTML = '';
             userReqs.forEach(req => {
                 const row = tbody.insertRow();
                 row.insertCell(0).textContent = new Date(req.createdAt).toLocaleString('pt-BR');
-                row.insertCell(1).textContent = req.petName || 'Não informado';
-                row.insertCell(2).innerHTML = `<span class="status-badge status-${req.status === 'Pendente' ? 'pendente' : 'aprovado'}">${req.status}</span>`;
-                const actionsCell = row.insertCell(3);
+                row.insertCell(1).textContent = this.formatDateRange(req.startDate, req.endDate);
+                row.insertCell(2).textContent = this.formatPetsList(req.pets);
+                row.insertCell(3).innerHTML = `<span class="status-badge status-${req.status === 'Pendente' ? 'pendente' : 'aprovado'}">${req.status}</span>`;
+                const actionsCell = row.insertCell(4);
                 actionsCell.className = 'action-buttons';
                 
                 const editBtn = document.createElement('button');
@@ -1032,13 +991,13 @@
                 viewBtn.textContent = '👁️ Ver';
                 viewBtn.className = 'btn-secondary';
                 viewBtn.onclick = () => {
-                    let medicationInfo = '';
-                    if (req.takesMedication === 'sim') {
-                        medicationInfo = `\n💊 Medicação: SIM\n📛 Medicamento: ${req.medicationName || 'Não informado'}\n💉 Dosagem: ${req.medicationDosage || 'Não informada'}`;
-                    } else if (req.takesMedication === 'nao') {
-                        medicationInfo = `\n💊 Medicação: NÃO`;
+                    let petsInfo = '';
+                    if (req.pets && req.pets.length > 0) {
+                        req.pets.forEach((p, i) => {
+                            petsInfo += `\n🐕 Pet ${i+1}: ${p.name}\n📅 Idade: ${p.age}`;
+                        });
                     }
-                    alert(`📋 DETALHES\n\nPet(s): ${req.petName}\nTipo: ${req.petType}\nPorte: ${req.petSize}\nIdade: ${req.age}\nRaça: ${req.breed}\n${medicationInfo}\nObservações: ${req.notes || 'Nenhuma'}`);
+                    alert(`📋 DETALHES\n${petsInfo}\n🐾 Tipo: ${req.petType}\n📏 Porte: ${req.petSize}\n📆 Período: ${this.formatDateRange(req.startDate, req.endDate)}\n💬 Observações: ${req.notes || 'Nenhuma'}`);
                 };
                 actionsCell.appendChild(viewBtn);
             });
@@ -1046,28 +1005,56 @@
 
         showEditModal(request) {
             const container = document.getElementById('editFormContent');
-            const takesMedicationChecked = request.takesMedication === 'sim' ? 'sim' : (request.takesMedication === 'nao' ? 'nao' : '');
-            const showMedicationFields = takesMedicationChecked === 'sim';
-            
-            container.innerHTML = `
-                <form id="editRequestForm">
-                    <div class="form-group"><label>🐕 Nome do(s) pet(s)</label><input type="text" id="editPetName" value="${request.petName || ''}" required></div>
-                    <div class="form-group"><label>🐾 Tipo do pet</label><input type="text" id="editPetType" value="${request.petType || ''}"></div>
-                    <div class="form-group"><label>📏 Porte</label><input type="text" id="editPetSize" value="${request.petSize || ''}"></div>
-                    <div class="form-group"><label>📅 Idade</label><input type="text" id="editAge" value="${request.age || ''}"></div>
-                    <div class="form-group"><label>🏷️ Raça</label><input type="text" id="editBreed" value="${request.breed || ''}"></div>
-                    
-                    <div class="form-group">
-                        <label>💊 O pet toma alguma medicação?</label>
+            let petsHtml = '';
+            if (request.pets && request.pets.length > 0) {
+                request.pets.forEach((pet, idx) => {
+                    petsHtml += `
+                        <div class="pet-item" data-idx="${idx}">
+                            <button type="button" class="remove-pet" onclick="this.closest('.pet-item').remove()">✕</button>
+                            <div class="grid-2cols">
+                                <div class="form-group"><label>🐕 Nome do pet ${idx+1}</label><input type="text" class="pet-name" value="${pet.name}" required></div>
+                                <div class="form-group"><label>📅 Idade</label><input type="text" class="pet-age" value="${pet.age}" placeholder="Ex: 2 anos" required></div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                petsHtml = `
+                    <div class="pet-item" data-idx="0">
                         <div class="grid-2cols">
-                            <div><input type="radio" name="editTakesMedication" id="editMedYes" value="sim" ${takesMedicationChecked === 'sim' ? 'checked' : ''}> <label for="editMedYes">✅ Sim</label></div>
-                            <div><input type="radio" name="editTakesMedication" id="editMedNo" value="nao" ${takesMedicationChecked === 'nao' ? 'checked' : ''}> <label for="editMedNo">❌ Não</label></div>
+                            <div class="form-group"><label>🐕 Nome do pet 1</label><input type="text" class="pet-name" value="${request.petName || ''}" required></div>
+                            <div class="form-group"><label>📅 Idade</label><input type="text" class="pet-age" value="${request.age || ''}" placeholder="Ex: 2 anos" required></div>
                         </div>
                     </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <form id="editRequestForm">
+                    <div class="form-group"><label>👤 Seu nome</label><input type="text" id="editOwnerName" value="${request.ownerName || ''}" required></div>
+                    <div class="form-group"><label>📍 Endereço</label><input type="text" id="editAddress" value="${request.address || ''}" required></div>
+                    <div class="grid-2cols">
+                        <div class="form-group"><label>📱 Telefone</label><input type="tel" id="editPhone" value="${request.phone || ''}" required></div>
+                        <div class="form-group"><label>✉️ E-mail</label><input type="email" id="editEmail" value="${request.email || ''}" required></div>
+                    </div>
                     
-                    <div id="editMedicationFields" class="medication-group" style="display: ${showMedicationFields ? 'block' : 'none'}">
-                        <div class="form-group"><label>📛 Nome do medicamento</label><input type="text" id="editMedicationName" value="${request.medicationName || ''}" placeholder="Ex: Antibiótico, Aines, etc."></div>
-                        <div class="form-group"><label>💉 Dosagem</label><input type="text" id="editMedicationDosage" value="${request.medicationDosage || ''}" placeholder="Ex: 1 comprimido a cada 12h, 2ml, etc."></div>
+                    <div class="pets-list">
+                        <h4>🐾 Lista de Pets</h4>
+                        <div id="editPetsContainer">${petsHtml}</div>
+                        <button type="button" class="btn-add-pet" id="editAddPetBtn">+ Adicionar outro pet</button>
+                    </div>
+                    
+                    <div class="grid-2cols">
+                        <div class="form-group"><label>🐾 Tipo do pet</label><input type="text" id="editPetType" value="${request.petType || ''}"></div>
+                        <div class="form-group"><label>📏 Porte</label><input type="text" id="editPetSize" value="${request.petSize || ''}"></div>
+                    </div>
+                    
+                    <div class="date-range-group">
+                        <label>📅 Período do serviço</label>
+                        <div class="grid-2cols">
+                            <div><input type="text" id="editStartDate" placeholder="Data de início" value="${request.startDate || ''}"></div>
+                            <div><input type="text" id="editEndDate" placeholder="Data de término" value="${request.endDate || ''}"></div>
+                        </div>
                     </div>
                     
                     <div class="form-group"><label>💬 Observações</label><textarea id="editNotes" rows="3">${request.notes || ''}</textarea></div>
@@ -1075,36 +1062,45 @@
                 </form>
             `;
             
-            // Adicionar eventos para mostrar/esconder campos de medicação
-            const medYes = document.getElementById('editMedYes');
-            const medNo = document.getElementById('editMedNo');
-            const medFields = document.getElementById('editMedicationFields');
+            flatpickr("#editStartDate", { dateFormat: "d/m/Y", locale: "pt", allowInput: true });
+            flatpickr("#editEndDate", { dateFormat: "d/m/Y", locale: "pt", allowInput: true });
             
-            if (medYes && medNo && medFields) {
-                medYes.addEventListener('change', () => { medFields.style.display = 'block'; });
-                medNo.addEventListener('change', () => { medFields.style.display = 'none'; });
-            }
+            document.getElementById('editAddPetBtn').onclick = () => {
+                const container = document.getElementById('editPetsContainer');
+                const idx = container.children.length;
+                const div = document.createElement('div');
+                div.className = 'pet-item';
+                div.innerHTML = `
+                    <button type="button" class="remove-pet" onclick="this.closest('.pet-item').remove()">✕</button>
+                    <div class="grid-2cols">
+                        <div class="form-group"><label>🐕 Nome do pet ${idx+1}</label><input type="text" class="pet-name" required></div>
+                        <div class="form-group"><label>📅 Idade</label><input type="text" class="pet-age" placeholder="Ex: 2 anos" required></div>
+                    </div>
+                `;
+                container.appendChild(div);
+            };
             
             document.getElementById('editRequestForm').onsubmit = (e) => {
                 e.preventDefault();
-                const takesMedication = document.querySelector('input[name="editTakesMedication"]:checked')?.value || '';
+                const pets = [];
+                document.querySelectorAll('#editPetsContainer .pet-item').forEach(item => {
+                    const name = item.querySelector('.pet-name')?.value;
+                    const age = item.querySelector('.pet-age')?.value;
+                    if (name && age) pets.push({ name, age });
+                });
+                
                 const updateData = {
-                    petName: document.getElementById('editPetName').value,
+                    ownerName: document.getElementById('editOwnerName').value,
+                    address: document.getElementById('editAddress').value,
+                    phone: document.getElementById('editPhone').value,
+                    email: document.getElementById('editEmail').value,
+                    pets: pets,
                     petType: document.getElementById('editPetType').value,
                     petSize: document.getElementById('editPetSize').value,
-                    age: document.getElementById('editAge').value,
-                    breed: document.getElementById('editBreed').value,
-                    notes: document.getElementById('editNotes').value,
-                    takesMedication: takesMedication
+                    startDate: document.getElementById('editStartDate').value,
+                    endDate: document.getElementById('editEndDate').value,
+                    notes: document.getElementById('editNotes').value
                 };
-                
-                if (takesMedication === 'sim') {
-                    updateData.medicationName = document.getElementById('editMedicationName')?.value || '';
-                    updateData.medicationDosage = document.getElementById('editMedicationDosage')?.value || '';
-                } else {
-                    updateData.medicationName = '';
-                    updateData.medicationDosage = '';
-                }
                 
                 this.app.updateRequest(request.id, updateData);
                 document.getElementById('editRequestModal').classList.remove('active');
@@ -1125,88 +1121,130 @@
                         <div class="form-group"><label>📱 Telefone</label><input type="tel" id="phone" required></div>
                         <div class="form-group"><label>✉️ E-mail</label><input type="email" id="email" required></div>
                     </div>
-                    <div class="form-group"><label>🐕 Nome do(s) pet(s)</label><input type="text" id="petName" required></div>
-                    <div class="form-group"><label>🐾 Tipo do pet</label>
-                        <div class="grid-3cols">
-                            <div><input type="radio" name="petType" id="typeCat" value="Gato" checked> <label for="typeCat">😺 Gato</label></div>
-                            <div><input type="radio" name="petType" id="typeDog" value="Cachorro"> <label for="typeDog">🐶 Cachorro</label></div>
-                            <div><input type="radio" name="petType" id="typeOther" value="Outro"> <label for="typeOther">🦜 Outro</label></div>
+                    
+                    <div class="pets-list">
+                        <h4>🐾 Lista de Pets</h4>
+                        <div id="petsContainer">
+                            <div class="pet-item" data-idx="0">
+                                <div class="grid-2cols">
+                                    <div class="form-group"><label>🐕 Nome do pet 1</label><input type="text" class="pet-name" required></div>
+                                    <div class="form-group"><label>📅 Idade</label><input type="text" class="pet-age" placeholder="Ex: 2 anos e 3 meses" required></div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="otherPetField" class="hidden"><input type="text" id="otherPetSpecify" placeholder="Qual animal?"></div>
+                        <button type="button" class="btn-add-pet" id="addPetBtn">+ Adicionar outro pet</button>
                     </div>
-                    <div class="form-group"><label>📏 Porte</label>
-                        <div class="grid-3cols">
-                            <div><input type="radio" name="petSize" value="Pequeno"> <label>🐭 Pequeno</label></div>
-                            <div><input type="radio" name="petSize" value="Médio"> <label>🐕 Médio</label></div>
-                            <div><input type="radio" name="petSize" value="Grande"> <label>🐕‍🦺 Grande</label></div>
-                        </div>
-                    </div>
+                    
                     <div class="grid-2cols">
-                        <div class="form-group"><label>📅 Idade</label><input type="text" id="age" placeholder="Ex: 2 anos" required></div>
-                        <div class="form-group"><label>🏷️ Raça</label><input type="text" id="breed" placeholder="SRD, Labrador..."></div>
+                        <div class="form-group"><label>🐾 Tipo do pet</label>
+                            <select id="petType">
+                                <option value="Cachorro">🐶 Cachorro</option>
+                                <option value="Gato">😺 Gato</option>
+                                <option value="Outro">🦜 Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>📏 Porte</label>
+                            <select id="petSize">
+                                <option value="Pequeno">🐭 Pequeno (até 10kg)</option>
+                                <option value="Médio">🐕 Médio (10-25kg)</option>
+                                <option value="Grande">🐕‍🦺 Grande (acima de 25kg)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="date-range-group">
+                        <h4> Período do Serviço</h4>
+                        <div class="grid-2cols">
+                            <div class="form-group"><label>📆 Data de início</label><input type="text" id="startDate" placeholder="Selecione a data" required></div>
+                            <div class="form-group"><label>📆 Data de término</label><input type="text" id="endDate" placeholder="Selecione a data" required></div>
+                        </div>
                     </div>
                     
                     <div class="form-group">
                         <label>💊 O pet toma alguma medicação?</label>
                         <div class="grid-2cols">
-                            <div><input type="radio" name="takesMedication" id="medYes" value="sim"> <label for="medYes">✅ Sim</label></div>
-                            <div><input type="radio" name="takesMedication" id="medNo" value="nao" checked> <label for="medNo">❌ Não</label></div>
+                            <div><input type="radio" name="takesMedication" id="medYes" value="sim"> <label>✅ Sim</label></div>
+                            <div><input type="radio" name="takesMedication" id="medNo" value="nao" checked> <label>❌ Não</label></div>
                         </div>
                     </div>
                     
                     <div id="medicationFields" class="medication-group" style="display: none;">
-                        <div class="form-group"><label>📛 Nome do medicamento</label><input type="text" id="medicationName" placeholder="Ex: Antibiótico, Aines, etc."></div>
-                        <div class="form-group"><label>💉 Dosagem</label><input type="text" id="medicationDosage" placeholder="Ex: 1 comprimido a cada 12h, 2ml, etc."></div>
+                        <div class="form-group"><label>📛 Nome do medicamento</label><input type="text" id="medicationName" placeholder="Ex: Antibiótico"></div>
+                        <div class="form-group"><label>💉 Dosagem</label><input type="text" id="medicationDosage" placeholder="Ex: 1 comprimido a cada 12h"></div>
                     </div>
                     
-                    <div class="form-group"><label>💬 Observações</label><textarea id="notes" rows="3" placeholder="Alergias, medos, etc."></textarea></div>
+                    <div class="form-group"><label>💬 Observações</label><textarea id="notes" rows="3" placeholder="Alergias, medos, necessidades especiais..."></textarea></div>
                     <button type="submit" class="btn-primary">💚 Enviar Solicitação</button>
                 </form>
             `;
             
-            // Configurar eventos para mostrar/esconder campos de medicação
+            flatpickr("#startDate", { dateFormat: "d/m/Y", locale: "pt", minDate: "today", allowInput: true,
+                onChange: (selectedDates) => {
+                    const endPicker = document.getElementById("endDate")._flatpickr;
+                    if (endPicker && selectedDates[0]) endPicker.set("minDate", selectedDates[0]);
+                }
+            });
+            flatpickr("#endDate", { dateFormat: "d/m/Y", locale: "pt", minDate: "today", allowInput: true });
+            
+            document.getElementById('addPetBtn').onclick = () => {
+                const container = document.getElementById('petsContainer');
+                const idx = container.children.length;
+                const div = document.createElement('div');
+                div.className = 'pet-item';
+                div.innerHTML = `
+                    <button type="button" class="remove-pet" onclick="this.closest('.pet-item').remove()">✕</button>
+                    <div class="grid-2cols">
+                        <div class="form-group"><label>🐕 Nome do pet ${idx+1}</label><input type="text" class="pet-name" required></div>
+                        <div class="form-group"><label>📅 Idade</label><input type="text" class="pet-age" placeholder="Ex: 2 anos" required></div>
+                    </div>
+                `;
+                container.appendChild(div);
+            };
+            
             const medYes = document.getElementById('medYes');
             const medNo = document.getElementById('medNo');
             const medFields = document.getElementById('medicationFields');
-            
-            if (medYes && medNo && medFields) {
-                medYes.addEventListener('change', () => { medFields.style.display = 'block'; });
-                medNo.addEventListener('change', () => { medFields.style.display = 'none'; });
-            }
-            
-            const otherRadio = document.getElementById('typeOther');
-            const otherField = document.getElementById('otherPetField');
-            document.querySelectorAll('input[name="petType"]').forEach(r => {
-                r.addEventListener('change', () => otherField.classList.toggle('hidden', !otherRadio?.checked));
-            });
+            medYes.addEventListener('change', () => { medFields.style.display = 'block'; });
+            medNo.addEventListener('change', () => { medFields.style.display = 'none'; });
             
             document.getElementById('petSitterForm').onsubmit = (e) => {
                 e.preventDefault();
-                let petType = document.querySelector('input[name="petType"]:checked')?.value || 'Gato';
-                if (petType === 'Outro') petType = document.getElementById('otherPetSpecify')?.value || 'Outro animal';
-                const petSize = document.querySelector('input[name="petSize"]:checked')?.value || 'Não informado';
-                const takesMedication = document.querySelector('input[name="takesMedication"]:checked')?.value || 'nao';
+                const pets = [];
+                document.querySelectorAll('#petsContainer .pet-item').forEach(item => {
+                    const name = item.querySelector('.pet-name')?.value;
+                    const age = item.querySelector('.pet-age')?.value;
+                    if (name && age) pets.push({ name, age });
+                });
+                
+                if (pets.length === 0) {
+                    alert('⚠️ Adicione pelo menos um pet!');
+                    return;
+                }
+                
+                const startDate = document.getElementById('startDate').value;
+                const endDate = document.getElementById('endDate').value;
+                if (!startDate || !endDate) {
+                    alert('⚠️ Selecione as datas de início e término!');
+                    return;
+                }
                 
                 const requestData = {
                     ownerName: document.getElementById('ownerName').value,
                     address: document.getElementById('address').value,
                     phone: document.getElementById('phone').value,
                     email: document.getElementById('email').value,
-                    petName: document.getElementById('petName').value,
-                    petType: petType,
-                    petSize: petSize,
-                    age: document.getElementById('age').value,
-                    breed: document.getElementById('breed').value || 'Não informado',
+                    pets: pets,
+                    petType: document.getElementById('petType').value,
+                    petSize: document.getElementById('petSize').value,
+                    startDate: startDate,
+                    endDate: endDate,
                     notes: document.getElementById('notes').value || 'Nenhuma',
-                    takesMedication: takesMedication
+                    takesMedication: document.querySelector('input[name="takesMedication"]:checked')?.value || 'nao'
                 };
                 
-                if (takesMedication === 'sim') {
+                if (requestData.takesMedication === 'sim') {
                     requestData.medicationName = document.getElementById('medicationName').value || 'Não informado';
                     requestData.medicationDosage = document.getElementById('medicationDosage').value || 'Não informada';
-                } else {
-                    requestData.medicationName = '';
-                    requestData.medicationDosage = '';
                 }
                 
                 this.app.addRequest(requestData);
@@ -1217,79 +1255,54 @@
             };
         }
 
-        showPetFormModal() {
-            this.loadPetForm();
-            document.getElementById('petFormModal').classList.add('active');
-        }
-
-        toggleUserRequests() {
-            const section = document.getElementById('userRequestsSection');
-            section.classList.toggle('hidden');
-            if (!section.classList.contains('hidden')) this.renderUserRequests();
+        showPetFormModal() { this.loadPetForm(); document.getElementById('petFormModal').classList.add('active'); }
+        toggleUserRequests() { 
+            const section = document.getElementById('userRequestsSection'); 
+            section.classList.toggle('hidden'); 
+            if (!section.classList.contains('hidden')) this.renderUserRequests(); 
         }
 
         initEventListeners() {
-            // Login
             document.getElementById('loginForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                const username = document.getElementById('loginUsername').value;
-                const password = document.getElementById('loginPassword').value;
-                if (this.app.login(username, password)) {
-                    if (this.app.currentUser.role === 'admin') this.showAdminScreen();
-                    else this.showUserScreen();
-                } else {
-                    this.showMessage('error', 'Usuário ou senha inválidos!', 'loginScreen');
-                }
+                if (this.app.login(document.getElementById('loginUsername').value, document.getElementById('loginPassword').value)) {
+                    this.app.currentUser.role === 'admin' ? this.showAdminScreen() : this.showUserScreen();
+                } else this.showMessage('error', 'Usuário ou senha inválidos!', 'loginScreen');
             });
             
-            // Registro
             document.getElementById('registerForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                const username = document.getElementById('regUsername').value;
-                const password = document.getElementById('regPassword').value;
+                const pwd = document.getElementById('regPassword').value;
                 const confirm = document.getElementById('regConfirmPassword').value;
-                if (password !== confirm) { this.showMessage('error', 'Senhas não conferem!', 'registerScreen'); return; }
-                if (this.app.register(username, password)) {
+                if (pwd !== confirm) { this.showMessage('error', 'Senhas não conferem!', 'registerScreen'); return; }
+                if (this.app.register(document.getElementById('regUsername').value, pwd)) {
                     this.showMessage('success', 'Conta criada! Faça login.', 'registerScreen');
                     setTimeout(() => this.showLoginScreen(), 1500);
-                } else {
-                    this.showMessage('error', 'Usuário já existe!', 'registerScreen');
-                }
+                } else this.showMessage('error', 'Usuário já existe!', 'registerScreen');
             });
             
-            // Reset Password
             document.getElementById('resetPasswordForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                const username = document.getElementById('resetUsername').value;
-                const newPassword = document.getElementById('resetNewPassword').value;
+                const newPwd = document.getElementById('resetNewPassword').value;
                 const confirm = document.getElementById('resetConfirmPassword').value;
-                if (newPassword !== confirm) { this.showMessage('error', 'Senhas não conferem!', 'resetPasswordScreen'); return; }
-                if (this.app.resetPassword(username, newPassword)) {
+                if (newPwd !== confirm) { this.showMessage('error', 'Senhas não conferem!', 'resetPasswordScreen'); return; }
+                if (this.app.resetPassword(document.getElementById('resetUsername').value, newPwd)) {
                     this.showMessage('success', 'Senha redefinida!', 'resetPasswordScreen');
                     setTimeout(() => this.showLoginScreen(), 1500);
-                } else {
-                    this.showMessage('error', 'Usuário não encontrado!', 'resetPasswordScreen');
-                }
+                } else this.showMessage('error', 'Usuário não encontrado!', 'resetPasswordScreen');
             });
             
-            // Admin create user
             document.getElementById('adminCreateUserForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                const username = document.getElementById('adminNewUsername').value;
-                const password = document.getElementById('adminNewPassword').value;
-                const role = document.getElementById('adminNewRole').value;
-                if (this.app.createUser(username, password, role)) {
-                    this.showMessage('success', `Usuário ${username} criado!`, 'adminScreen');
+                if (this.app.createUser(document.getElementById('adminNewUsername').value, document.getElementById('adminNewPassword').value, document.getElementById('adminNewRole').value)) {
+                    this.showMessage('success', 'Usuário criado!', 'adminScreen');
                     this.renderUsersTable();
                     document.getElementById('createUserModal').classList.remove('active');
-                } else {
-                    this.showMessage('error', 'Usuário já existe!', 'adminScreen');
-                }
+                } else this.showMessage('error', 'Usuário já existe!', 'adminScreen');
             });
             
-            // Navigation
-            document.getElementById('showRegisterBtn').onclick = () => this.showRegisterScreen();
-            document.getElementById('showResetPasswordBtn').onclick = () => this.showResetScreen();
+            document.getElementById('showRegisterBtn').onclick = () => { document.getElementById('loginScreen').classList.add('hidden'); document.getElementById('registerScreen').classList.remove('hidden'); };
+            document.getElementById('showResetPasswordBtn').onclick = () => { document.getElementById('loginScreen').classList.add('hidden'); document.getElementById('resetPasswordScreen').classList.remove('hidden'); };
             document.getElementById('backToLoginFromReg').onclick = () => this.showLoginScreen();
             document.getElementById('backToLoginFromReset').onclick = () => this.showLoginScreen();
             document.getElementById('logoutBtn').onclick = () => this.logout();
@@ -1302,39 +1315,18 @@
             document.getElementById('closeEditModal').onclick = () => document.getElementById('editRequestModal').classList.remove('active');
             document.getElementById('cardNewRequest').onclick = () => this.showPetFormModal();
             document.getElementById('cardMyRequests').onclick = () => this.toggleUserRequests();
-            
             window.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('active'); };
         }
 
-        showRegisterScreen() {
-            document.getElementById('loginScreen').classList.add('hidden');
-            document.getElementById('registerScreen').classList.remove('hidden');
-        }
-
-        showResetScreen() {
-            document.getElementById('loginScreen').classList.add('hidden');
-            document.getElementById('resetPasswordScreen').classList.remove('hidden');
-        }
-
-        logout() {
-            this.app.logout();
-            this.showLoginScreen();
-        }
+        logout() { this.app.logout(); this.showLoginScreen(); }
     }
 
-    // Inicialização
     const app = new AppState();
     const ui = new UIController(app);
     
-    // Inicializar UI baseado no estado atual
-    if (app.currentUser) {
-        if (app.currentUser.role === 'admin') ui.showAdminScreen();
-        else ui.showUserScreen();
-    } else {
-        ui.showLoginScreen();
-    }
+    if (app.currentUser) app.currentUser.role === 'admin' ? ui.showAdminScreen() : ui.showUserScreen();
+    else ui.showLoginScreen();
     
-    // Gerar patinhas flutuantes
     (function generateFloatingPaws() {
         const container = document.getElementById('floatingDecor');
         if (!container) return;
@@ -1348,7 +1340,7 @@
             paw.style.top = `${Math.random() * 100}%`;
             paw.style.animationDuration = `${Math.random() * 30 + 15}s`;
             paw.style.animationDelay = `${Math.random() * 10}s`;
-            paw.style.opacity = `${Math.random() * 0.08 + 0.03}`;
+            paw.style.opacity = `${Math.random() * 0.1 + 0.05}`;
             container.appendChild(paw);
         }
     })();
